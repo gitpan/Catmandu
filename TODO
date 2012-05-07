@@ -1,0 +1,25 @@
+TODO
+
+* (better) error handling
+* logger
+* contributors guide
+* add catmandu-examples as tests
+* split into separate modules:
+  * Catmandu::Exporter::BibTeX
+  * Catmandu::Exporter::XLS
+  * Catmandu::Importer::Atom
+  * Catmandu::Store::ElasticSearch
+  * Catmandu::Store::Solr
+  * Catmandu::Store::DBI (?)
+  * Dancer::Session::
+* remove Dancer from Catmandu::Exporter::Template
+* turn Dancer::Plugin::Catmandu::* into Plack::App::* (?)
+* validation
+* remove Fixable, add before_add and before_get, takes fixes or sub
+* give Iterable fix method
+* give Iterable export, export_to_string methods
+* bag drop
+* Searchable handle index optimize
+* split Searchable into Searchable and CQL Searchable (?)
+* generator should guard with a magic ref, not undef (?)
+

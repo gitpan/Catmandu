@@ -1,0 +1,283 @@
+---
+abstract: 'a data toolkit'
+author:
+  - 'Nicolas Steenlant <nicolas.steenlant@ugent.be>'
+  - 'Patrick Hochstenbach <patrick.hochstenbach@ugent.be>'
+build_requires:
+  Software::License: 0
+  Test::Exception: 0.31
+configure_requires:
+  Module::Build: 0.38
+dynamic_config: 1
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.120921'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Catmandu
+provides:
+  CQL::ElasticSearch:
+    file: lib/CQL/ElasticSearch.pm
+    version: 0
+  CQL::Solr:
+    file: lib/CQL/Solr.pm
+    version: 0
+  Catmandu:
+    file: lib/Catmandu.pm
+    version: 0.01
+  Catmandu::Addable:
+    file: lib/Catmandu/Addable.pm
+    version: 0
+  Catmandu::Bag:
+    file: lib/Catmandu/Bag.pm
+    version: 0
+  Catmandu::Buffer:
+    file: lib/Catmandu/Buffer.pm
+    version: 0
+  Catmandu::CLI:
+    file: lib/Catmandu/CLI.pm
+    version: 0
+  Catmandu::Cmd:
+    file: lib/Catmandu/Cmd.pm
+    version: 0
+  Catmandu::Cmd::config:
+    file: lib/Catmandu/Cmd/config.pm
+    version: 0
+  Catmandu::Cmd::data:
+    file: lib/Catmandu/Cmd/data.pm
+    version: 0
+  Catmandu::Counter:
+    file: lib/Catmandu/Counter.pm
+    version: 0
+  Catmandu::Exporter:
+    file: lib/Catmandu/Exporter.pm
+    version: 0
+  Catmandu::Exporter::BibTeX:
+    file: lib/Catmandu/Exporter/BibTeX.pm
+    version: 0
+  Catmandu::Exporter::CSV:
+    file: lib/Catmandu/Exporter/CSV.pm
+    version: 0
+  Catmandu::Exporter::JSON:
+    file: lib/Catmandu/Exporter/JSON.pm
+    version: 0
+  Catmandu::Exporter::RIS:
+    file: lib/Catmandu/Exporter/RIS.pm
+    version: 0
+  Catmandu::Exporter::Template:
+    file: lib/Catmandu/Exporter/Template.pm
+    version: 0
+  Catmandu::Exporter::XLS:
+    file: lib/Catmandu/Exporter/XLS.pm
+    version: 0
+  Catmandu::Exporter::YAML:
+    file: lib/Catmandu/Exporter/YAML.pm
+    version: 0
+  Catmandu::Fix:
+    file: lib/Catmandu/Fix.pm
+    version: 0
+  Catmandu::Fix::Loader:
+    file: lib/Catmandu/Fix.pm
+    version: 0
+  Catmandu::Fix::Loader::Env:
+    file: lib/Catmandu/Fix.pm
+    version: 0
+  Catmandu::Fix::add_field:
+    file: lib/Catmandu/Fix/add_field.pm
+    version: 0
+  Catmandu::Fix::capitalize:
+    file: lib/Catmandu/Fix/capitalize.pm
+    version: 0
+  Catmandu::Fix::clone:
+    file: lib/Catmandu/Fix/clone.pm
+    version: 0
+  Catmandu::Fix::collapse:
+    file: lib/Catmandu/Fix/collapse.pm
+    version: 0
+  Catmandu::Fix::copy_field:
+    file: lib/Catmandu/Fix/copy_field.pm
+    version: 0
+  Catmandu::Fix::downcase:
+    file: lib/Catmandu/Fix/downcase.pm
+    version: 0
+  Catmandu::Fix::expand:
+    file: lib/Catmandu/Fix/expand.pm
+    version: 0
+  Catmandu::Fix::join_field:
+    file: lib/Catmandu/Fix/join_field.pm
+    version: 0
+  Catmandu::Fix::marc_in_json:
+    file: lib/Catmandu/Fix/marc_in_json.pm
+    version: 0
+  Catmandu::Fix::marc_map:
+    file: lib/Catmandu/Fix/marc_map.pm
+    version: 0
+  Catmandu::Fix::marc_xml:
+    file: lib/Catmandu/Fix/marc_xml.pm
+    version: 0
+  Catmandu::Fix::move_field:
+    file: lib/Catmandu/Fix/move_field.pm
+    version: 0
+  Catmandu::Fix::remove_field:
+    file: lib/Catmandu/Fix/remove_field.pm
+    version: 0
+  Catmandu::Fix::replace_all:
+    file: lib/Catmandu/Fix/replace_all.pm
+    version: 0
+  Catmandu::Fix::retain_field:
+    file: lib/Catmandu/Fix/retain_field.pm
+    version: 0
+  Catmandu::Fix::set_field:
+    file: lib/Catmandu/Fix/set_field.pm
+    version: 0
+  Catmandu::Fix::split_field:
+    file: lib/Catmandu/Fix/split_field.pm
+    version: 0
+  Catmandu::Fix::substring:
+    file: lib/Catmandu/Fix/substring.pm
+    version: 0
+  Catmandu::Fix::trim:
+    file: lib/Catmandu/Fix/trim.pm
+    version: 0
+  Catmandu::Fix::upcase:
+    file: lib/Catmandu/Fix/upcase.pm
+    version: 0
+  Catmandu::Fixable:
+    file: lib/Catmandu/Fixable.pm
+    version: 0
+  Catmandu::Hits:
+    file: lib/Catmandu/Hits.pm
+    version: 0
+  Catmandu::Importer:
+    file: lib/Catmandu/Importer.pm
+    version: 0
+  Catmandu::Importer::Atom:
+    file: lib/Catmandu/Importer/Atom.pm
+    version: 0
+  Catmandu::Importer::CSV:
+    file: lib/Catmandu/Importer/CSV.pm
+    version: 0
+  Catmandu::Importer::JSON:
+    file: lib/Catmandu/Importer/JSON.pm
+    version: 0
+  Catmandu::Importer::Mock:
+    file: lib/Catmandu/Importer/Mock.pm
+    version: 0
+  Catmandu::Importer::YAML:
+    file: lib/Catmandu/Importer/YAML.pm
+    version: 0
+  Catmandu::Iterable:
+    file: lib/Catmandu/Iterable.pm
+    version: 0
+  Catmandu::Iterator:
+    file: lib/Catmandu/Iterator.pm
+    version: 0
+  Catmandu::Pager:
+    file: lib/Catmandu/Pager.pm
+    version: 0
+  Catmandu::Pluggable:
+    file: lib/Catmandu/Pluggable.pm
+    version: 0
+  Catmandu::Plugin::Datestamps:
+    file: lib/Catmandu/Plugin/Datestamps.pm
+    version: 0
+  Catmandu::Plugin::Versions:
+    file: lib/Catmandu/Plugin/Versions.pm
+    version: 0
+  Catmandu::Sane:
+    file: lib/Catmandu/Sane.pm
+    version: 0
+  Catmandu::Searchable:
+    file: lib/Catmandu/Searchable.pm
+    version: 0
+  Catmandu::Serializer:
+    file: lib/Catmandu/Serializer.pm
+    version: 0
+  Catmandu::Store:
+    file: lib/Catmandu/Store.pm
+    version: 0
+  Catmandu::Store::DBI:
+    file: lib/Catmandu/Store/DBI.pm
+    version: 0
+  Catmandu::Store::DBI::Bag:
+    file: lib/Catmandu/Store/DBI.pm
+    version: 0
+  Catmandu::Store::ElasticSearch:
+    file: lib/Catmandu/Store/ElasticSearch.pm
+    version: 0
+  Catmandu::Store::ElasticSearch::Bag:
+    file: lib/Catmandu/Store/ElasticSearch.pm
+    version: 0
+  Catmandu::Store::ElasticSearch::Searcher:
+    file: lib/Catmandu/Store/ElasticSearch.pm
+    version: 0
+  Catmandu::Store::Hash:
+    file: lib/Catmandu/Store/Hash.pm
+    version: 0
+  Catmandu::Store::Hash::Bag:
+    file: lib/Catmandu/Store/Hash.pm
+    version: 0
+  Catmandu::Store::SBCatDB:
+    file: lib/Catmandu/Store/SBCatDB.pm
+    version: 0
+  Catmandu::Store::SBCatDB::Bag:
+    file: lib/Catmandu/Store/SBCatDB.pm
+    version: 0
+  Catmandu::Store::Solr:
+    file: lib/Catmandu/Store/Solr.pm
+    version: 0
+  Catmandu::Store::Solr::Bag:
+    file: lib/Catmandu/Store/Solr.pm
+    version: 0
+  Catmandu::Store::Solr::Searcher:
+    file: lib/Catmandu/Store/Solr.pm
+    version: 0
+  Catmandu::Util:
+    file: lib/Catmandu/Util.pm
+    version: 0
+  Dancer::Plugin::Catmandu::OAI:
+    file: lib/Dancer/Plugin/Catmandu/OAI.pm
+    version: 0.01
+  Dancer::Plugin::Catmandu::SRU:
+    file: lib/Dancer/Plugin/Catmandu/SRU.pm
+    version: 0.01
+  Dancer::Session::Catmandu:
+    file: lib/Dancer/Session/Catmandu.pm
+    version: 0.01
+  Plack::Session::Store::Catmandu:
+    file: lib/Plack/Session/Store/Catmandu.pm
+    version: 0.01
+recommends:
+  JSON::XS: 2.3
+  YAML::XS: 0.34
+requires:
+  App::Cmd: 0.310
+  CGI::Expand: 2.02
+  Clone: 0.31
+  DBI: 1.616
+  Dancer: 1.3094
+  Data::Compare: 1.22
+  Data::MessagePack: 0.39
+  Data::SpreadPagination: 0.001002
+  Data::UUID: 1.217
+  Data::Util: 0.59
+  DateTime: 0.70
+  ElasticSearch: 0.50
+  IO::String: 1.08
+  JSON: 2.51
+  LaTeX::Encode: 0.03
+  Moo: 0.009011
+  Plack: 0.9982
+  Plack::Middleware::Session: 0.14
+  SRU: 0.99
+  Spreadsheet::WriteExcel: 2.37
+  Sub::Exporter: 0.982
+  Template: 2.22
+  Text::CSV: 1.21
+  WebService::Solr: 0.16
+  XML::Atom: 0.41
+  YAML::Any: 0.77
+  perl: v5.10.0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.01
