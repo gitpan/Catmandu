@@ -24,7 +24,7 @@ provides:
     version: 0
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.01
+    version: 0.0101
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -105,15 +105,6 @@ provides:
     version: 0
   Catmandu::Fix::join_field:
     file: lib/Catmandu/Fix/join_field.pm
-    version: 0
-  Catmandu::Fix::marc_in_json:
-    file: lib/Catmandu/Fix/marc_in_json.pm
-    version: 0
-  Catmandu::Fix::marc_map:
-    file: lib/Catmandu/Fix/marc_map.pm
-    version: 0
-  Catmandu::Fix::marc_xml:
-    file: lib/Catmandu/Fix/marc_xml.pm
     version: 0
   Catmandu::Fix::move_field:
     file: lib/Catmandu/Fix/move_field.pm
@@ -261,12 +252,13 @@ requires:
   Data::SpreadPagination: 0.001002
   Data::UUID: 1.217
   Data::Util: 0.59
+  Data::Visitor::Callback: 0.28
   DateTime: 0.70
   ElasticSearch: 0.50
   IO::String: 1.08
   JSON: 2.51
   LaTeX::Encode: 0.03
-  Moo: 0.009011
+  Moo: 0.091000
   Plack: 0.9982
   Plack::Middleware::Session: 0.14
   SRU: 0.99
@@ -280,4 +272,4 @@ requires:
   perl: v5.10.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01
+version: 0.0101
