@@ -34,7 +34,7 @@ WriteMakefile
                    'Text::CSV' => '1.21',
                    'WebService::Solr' => '0.16',
                    'XML::Atom' => '0.41',
-                   'YAML::Any' => '0.77'
+                   'YAML::Any' => '0.81'
                  },
   'INSTALLDIRS' => 'site',
   'EXE_FILES' => [

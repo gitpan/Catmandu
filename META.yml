@@ -24,7 +24,7 @@ provides:
     version: 0
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.0101
+    version: 0.0102
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -268,8 +268,8 @@ requires:
   Text::CSV: 1.21
   WebService::Solr: 0.16
   XML::Atom: 0.41
-  YAML::Any: 0.77
+  YAML::Any: 0.81
   perl: v5.10.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.0101
+version: 0.0102
