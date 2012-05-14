@@ -50,7 +50,7 @@ lib/Catmandu/Iterator.pm
 lib/Catmandu/Pager.pm
 lib/Catmandu/Pluggable.pm
 lib/Catmandu/Plugin/Datestamps.pm
-lib/Catmandu/Plugin/Versions.pm
+lib/Catmandu/Plugin/Versioning.pm
 lib/Catmandu/Sane.pm
 lib/Catmandu/Searchable.pm
 lib/Catmandu/Serializer.pm
@@ -119,7 +119,7 @@ t/Catmandu-Iterator.t
 t/Catmandu-Pager.t
 t/Catmandu-Pluggable.t
 t/Catmandu-Plugin-Datestamps.t
-t/Catmandu-Plugin-Versions.t
+t/Catmandu-Plugin-Versioning.t
 t/Catmandu-Sane.t
 t/Catmandu-Searchable.t
 t/Catmandu-Serializer.t

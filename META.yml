@@ -24,7 +24,7 @@ provides:
     version: 0
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.0102
+    version: 0.0103
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -172,8 +172,8 @@ provides:
   Catmandu::Plugin::Datestamps:
     file: lib/Catmandu/Plugin/Datestamps.pm
     version: 0
-  Catmandu::Plugin::Versions:
-    file: lib/Catmandu/Plugin/Versions.pm
+  Catmandu::Plugin::Versioning:
+    file: lib/Catmandu/Plugin/Versioning.pm
     version: 0
   Catmandu::Sane:
     file: lib/Catmandu/Sane.pm
@@ -258,7 +258,7 @@ requires:
   IO::String: 1.08
   JSON: 2.51
   LaTeX::Encode: 0.03
-  Moo: 0.091000
+  Moo: 0.091004
   Plack: 0.9982
   Plack::Middleware::Session: 0.14
   SRU: 0.99
@@ -269,7 +269,7 @@ requires:
   WebService::Solr: 0.16
   XML::Atom: 0.41
   YAML::Any: 0.81
-  perl: v5.10.0
+  perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.0102
+version: 0.0103
