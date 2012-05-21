@@ -12,24 +12,27 @@ Catmandu - a data toolkit
 
 Importing, transforming, storing and indexing data should be easy.
 
-Catmandu provides a suite of Perl modules to ease the import, storage, retrieval,
-export and transformation of metadata records. Combine Catmandu modules with web
-application frameworks such as PSGI/Plack, document stores such as MongoDB and
-full text indexes as Solr to create a rapid development environment for digital library
-services such as institutional repositories and search engines.
+Catmandu provides a suite of Perl modules to ease the import, storage,
+retrieval, export and transformation of metadata records. Combine Catmandu
+modules with web application frameworks such as PSGI/Plack, document stores
+such as MongoDB and full text indexes as Solr to create a rapid development
+environment for digital library services such as institutional repositories and
+search engines.
 
-In the LibreCat project it is our goal to provide in open source a set of programming
-components to build up digital libraries services suited to your local needs.
+In the LibreCat project it is our goal to provide in open source a set of
+programming components to build up digital libraries services suited to your
+local needs.
 
-Read an in depth introduction into Catmandu programming in L<Catmandu::Introduction>.
+Read an in depth introduction into Catmandu programming in
+L<Catmandu::Introduction>.
 
 =head1 VERSION
 
-Version 0.0104
+Version 0.0105
 
 =cut
 
-our $VERSION = '0.0104';
+our $VERSION = '0.0105';
 
 =head1 SYNOPSIS
 
@@ -47,6 +50,37 @@ our $VERSION = '0.0104';
     use Catmandu qw(config store);
     use Catmandu -load;
     use Catmandu -all -load => [qw(/config/path' '/another/config/path)];
+
+=head1 CONFIG
+
+Catmandu configuration options can be stored in a file in the root directory of
+your programming project. The file can be YAML, JSON or Perl and is called
+C<catmandu.yml>, C<catmandu.json> or C<catmandu.pl>. In this file you can set
+the default Catmandu stores and exporters to be used. Here is an example of a
+C<catmandu.yml> file:
+
+    store:
+     default:
+      package: ElasticSearch
+       options:
+        index_name: myrepository
+
+    exporter:
+     default:
+      package: YAML
+
+=head2 Split config
+
+For large configs it's more convenient to split the config in several files.
+You can do so by including the config hash key in the file name.
+
+    catmandu.yaml
+    catmandu.store.yaml
+    catmandu.foo.bar.json
+
+Config files are processed in alfabetical order. To keep things simple values
+are not merged.  So the contents of C<catmandu.store.yml> will overwrite
+C<< Catmandu->config->{store} >> if it already exists.
 
 =head1 EXPORTS
 
@@ -123,7 +157,12 @@ sub _import_load {
 
 =head2 default_load_path
 
+Return the path where Catmandu will (optionally) search for a catmandu.yml
+configuration file.
+
 =head2 default_load_path('/default/path')
+
+Set the location of the default configuration file to a new path.
 
 =cut
 
@@ -140,7 +179,11 @@ sub default_load_path {
 
 =head2 load
 
+Load all the configuration options in the catmanu.yml configuraton file.
+
 =head2 load('/path', '/another/path')
+
+Load all the configuration options stored at alternative paths.
 
 =cut
 
@@ -197,6 +240,8 @@ sub load {
 
 =head2 config
 
+Return a HASH representation of the current configuration file.
+
 =cut
 
 sub config {
@@ -207,11 +252,32 @@ my $stores = {};
 
 =head2 default_store
 
+Return the name of the default store.
+
 =cut
 
 sub default_store { 'default' }
 
-=head2 store
+=head2 store([NAME])
+
+Return an instance of a store with name NAME or use the default store when no
+name is provided.  The NAME is set in the configuration file. E.g.
+
+ store:
+  default:
+   package: ElasticSearch
+   options:
+     index_name: blog
+  test:
+   package: Mock
+
+In your program:
+
+    # This will use ElasticSearch
+    Catmandu->store->bag->each(sub {  ... });
+    Catmandu->store('default')->bag->each(sub {  ... });
+    # This will use Mock
+    Catmandu->store('test')->bag->search(...);
 
 =cut
 
@@ -234,7 +300,25 @@ sub store {
     };
 }
 
-=head2 importer
+=head2 importer(NAME)
+
+Return an instance of a Catmandu::Importer with name NAME (or the default 'JSON' when no name is given).
+The NAME is set in the configuration file. E.g.
+
+ importer:
+  oai:
+   package: OAI
+    options:
+     url: http://www.instute.org/oai/
+  feed:
+   package: Atom
+    options:
+     url: http://www.mysite.org/blog/atom
+
+In your program:
+
+Catmandu->importer('oai')->each(sub { ... } );
+Catmandu->importer('feed')->each(sub { ... } );
 
 =cut
 
@@ -254,7 +338,10 @@ sub importer {
     }
 }
 
-=head2 exporter
+=head2 exporter([NAME])
+
+Return an instance of Catmandu::Exporter with name NAME (or the default 'JSON' when no name is given).
+The NAME is set in the configuration file (see 'importer').
 
 =cut
 
@@ -274,7 +361,15 @@ sub exporter {
     }
 }
 
-=head2 export
+=head2 export($data,[NAME])
+
+Export data using a default or named exporter.
+
+    Catmandu->export({ foo=>'bar'});
+
+    my $importer = Catmandu::Importer::Mock->new;
+    Catmandu->export($importer, 'YAML', file => '/my/file');
+    Catmandu->export($importer, 'my_exporter');
 
 =cut
 
@@ -290,6 +385,14 @@ sub export {
 }
 
 =head2 export_to_string
+
+Export data using a default or named exporter to a string.
+
+    my $importer = Catmandu::Importer::Mock->new;
+    my $yaml = Catmandu->export_to_string($importer, 'YAML');
+    # is the same as
+    my $yaml = "";
+    Catmandu->export($importer, 'YAML', file => \$yaml);
 
 =cut
 
