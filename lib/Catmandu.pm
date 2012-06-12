@@ -28,11 +28,11 @@ L<Catmandu::Introduction>.
 
 =head1 VERSION
 
-Version 0.0106
+Version 0.02
 
 =cut
 
-our $VERSION = '0.0106';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -157,8 +157,8 @@ sub _import_load {
 
 =head2 default_load_path
 
-Return the path where Catmandu will (optionally) search for a catmandu.yml
-configuration file.
+Return the path where Catmandu will (optionally) start searching for a
+catmandu.yml configuration file.
 
 =head2 default_load_path('/default/path')
 
@@ -167,9 +167,9 @@ Set the location of the default configuration file to a new path.
 =cut
 
 sub default_load_path {
-    my ($class, @paths) = @_;
+    my ($class, $path) = @_;
     state $default_path;
-    $default_path = join ',', @paths if @paths;
+    $default_path = $path if defined $path;
     $default_path //= do {
         my $script = File::Spec->rel2abs($0);
         my ($script_vol, $script_path, $script_name) = File::Spec->splitpath($0);
@@ -188,48 +188,50 @@ Load all the configuration options stored at alternative paths.
 =cut
 
 sub load {
-    my ($self, @paths) = @_;
+    my ($self, @load_paths) = @_;
 
-    push @paths, $self->default_load_path unless @paths;
+    push @load_paths, $self->default_load_path unless @load_paths;
 
-    @paths = map { File::Spec->rel2abs($_) } split /,/, join ',', @paths;
+    @load_paths = map { File::Spec->rel2abs($_) } split /,/, join ',', @load_paths;
 
-    for my $path (@paths) {
-        my @dirs = grep length, File::Spec->splitdir($path);
+    for my $load_path (@load_paths) {
+        my @dirs = grep length, File::Spec->splitdir($load_path);
 
         for (;@dirs;pop @dirs) {
-            my $dir = File::Spec->catdir(File::Spec->rootdir, @dirs);
+            my $path = File::Spec->catdir(File::Spec->rootdir, @dirs);
 
-            opendir my $dh, $dir or last;
+            opendir my $dh, $path or last;
 
             my @files = sort
-                        grep { -f -r File::Spec->catfile($dir, $_) }
+                        grep { -f -r File::Spec->catfile($path, $_) }
                         grep { /^catmandu\./ }
                         readdir $dh;
             for my $file (@files) {
                 if (my ($keys, $ext) = $file =~ /^catmandu(.*)\.(pl|yaml|yml|json)$/) {
-                    $file = File::Spec->catfile($dir, $file);
+                    $keys = substr $keys, 1 if $keys; # remove leading dot
+
+                    $file = File::Spec->catfile($path, $file);
 
                     my $config = $self->config;
-                    for (split '.', $keys) {
-                        $config = $config->{$_} ||= {};
-                    }
                     my $c;
+
+                    $config = $config->{$_} ||= {} for split /\./, $keys;
+
                     given ($ext) {
-                        when ('pl')            { $c = do $file }
-                        when (['yaml', 'yml']) { $c = read_yaml($file) }
-                        when ('json')          { $c = read_json($file) }
+                        when ('pl')    { $c = do $file }
+                        when (/ya?ml/) { $c = read_yaml($file) }
+                        when ('json')  { $c = read_json($file) }
                     }
-                    for (keys %$c) {
-                        $config->{$_} = $c->{$_};
-                    }
+                    $config->{$_} = $c->{$_} for keys %$c;
                 }
             }
 
             if (@files) {
-                my $lib_dir = File::Spec->catdir($dir, 'lib');
-                if (-d -r $lib_dir) {
-                    use_lib $lib_dir;
+                unshift @{$self->roots}, $path;
+
+                my $lib_path = File::Spec->catdir($path, 'lib');
+                if (-d -r $lib_path) {
+                    use_lib $lib_path;
                 }
 
                 last;
@@ -238,9 +240,31 @@ sub load {
     }
 }
 
+=head2 roots
+
+Returns an ARRAYREF of paths where configuration was found. Note that this list
+is empty before C<load>.
+
+=cut
+
+sub roots {
+    state $roots = [];
+}
+
+=head2 root
+
+Returns the first path where configuration was found. Note that this is
+C<undef> before C<load>.
+
+=cut
+
+sub root {
+    $_[0]->roots->[0];
+}
+
 =head2 config
 
-Return a HASH representation of the current configuration file.
+Returns the current configuration as a HASHREF.
 
 =cut
 
@@ -318,6 +342,7 @@ The NAME is set in the configuration file. E.g.
 In your program:
 
 Catmandu->importer('oai')->each(sub { ... } );
+Catmandu->importer('oai', url => 'http://override')->each(sub { ... } );
 Catmandu->importer('feed')->each(sub { ... } );
 
 =cut
@@ -370,6 +395,7 @@ Export data using a default or named exporter.
     my $importer = Catmandu::Importer::Mock->new;
     Catmandu->export($importer, 'YAML', file => '/my/file');
     Catmandu->export($importer, 'my_exporter');
+    Catmandu->export($importer, 'my_exporter', foo => $bar);
 
 =cut
 
