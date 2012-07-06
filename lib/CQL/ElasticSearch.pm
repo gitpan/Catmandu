@@ -1,156 +1,177 @@
 package CQL::ElasticSearch;
 
 use Catmandu::Sane;
-use Catmandu::Util qw(require_package trim);
-use CQL::Parser;
 use Moo;
+use Catmandu::Util qw(require_package trim);
+use Scalar::Util qw(blessed);
+use CQL::Parser;
 
+has parser  => (is => 'ro', lazy => 1, builder => '_build_parser');
 has mapping => (is => 'ro');
 
-my $any_field = qr'^(srw|cql)\.(serverChoice|anywhere)$'i;
-my $match_all = qr'^(srw|cql)\.allRecords$'i;
-my $distance_modifier = qr'\s*\/\s*distance\s*<\s*(\d+)'i;
+my $RE_ANY_FIELD = qr'^(srw|cql)\.(serverChoice|anywhere)$'i;
+my $RE_MATCH_ALL = qr'^(srw|cql)\.allRecords$'i;
+my $RE_DISTANCE_MODIFIER = qr'\s*\/\s*distance\s*<\s*(\d+)'i;
 
-my $parser;
+sub _build_parser {
+    CQL::Parser->new;
+}
 
 sub parse {
     my ($self, $query) = @_;
-    $parser ||= CQL::Parser->new;
-    my $node;
-    eval {
-        $node = $parser->parse($query);
+    my $node = eval {
+        $self->parser->parse($query);
     } or do {
-        my $e = $@;
-        die "cql error: $e";
+        my $error = $@;
+        die "cql error: $error";
     };
-    $self->visit($node);
+    $self->parse_node($node);
 }
 
-sub visit {
+sub parse_node {
     my ($self, $node) = @_;
 
-    if ($node->isa('CQL::TermNode')) {
-        my $term = $node->getTerm;
+    my $query = {};
 
-        if ($term =~ $match_all) {
-            return { match_all => {} };
-        }
-
-        my $qualifier = $node->getQualifier;
-        my $relation  = $node->getRelation;
-        my @modifiers = $relation->getModifiers;
-        my $base      = lc $relation->getBase;
-
-        if ($base eq 'scr') {
-            if ($self->mapping and my $rel = $self->mapping->{default_relation}) {
-                $base = $rel;
-            } else {
-                $base = '=';
-            }
-        }
-
-        if ($qualifier =~ $any_field) {
-            if ($self->mapping and my $idx = $self->mapping->{default_index}) {
-                $qualifier = $idx;
-            } else {
-                $qualifier = '_all';
-            }
-        }
-
-        my $nested;
-
-        if ($self->mapping and my $indexes = $self->mapping->{indexes}) {
-            $qualifier = lc $qualifier;
-            $qualifier =~ s/(?<=[^_])_(?=[^_])//g if $self->mapping->{strip_separating_underscores};
-            my $mapping = $indexes->{$qualifier} or confess "cql error: unknown index $qualifier";
-            $mapping->{op}{$base} or confess "cql error: relation $base not allowed";
-            my $op = $mapping->{op}{$base};
-            if (ref $op && $op->{field}) {
-                $qualifier = $op->{field};
-            } elsif ($mapping->{field}) {
-                $qualifier = $mapping->{field};
-            }
-
-            my $filters;
-            if (ref $op && $op->{filter}) {
-                $filters = $op->{filter};
-            } elsif ($mapping->{filter}) {
-                $filters = $mapping->{filter};
-            }
-            if ($filters) {
-                for my $filter (@$filters) {
-                    given ($filter) {
-                        when ('lowercase') { $term = lc $term }
-                    }
-                }
-            }
-            if (ref $op && $op->{cb}) {
-                my ($pkg, $sub) = @{$op->{cb}};
-                $term = require_package($pkg)->$sub($term);
-            } elsif ($mapping->{cb}) {
-                my ($pkg, $sub) = @{$mapping->{cb}};
-                $term = require_package($pkg)->$sub($term);
-            }
-
-            $nested = $mapping->{nested};
-        }
-
-        my $query = _term_node($base, $qualifier, $term, @modifiers);
-
-        if ($nested) {
-            if ($nested->{query}) {
-                $query = { bool => { must => [
-                    $nested->{query},
-                    $query,
-                ] } };
-            }
-            $query = { nested => {
-                path  => $nested->{path},
-                query => $query,
-            } };
-        }
-
+    unless ($node->isa('CQL::BooleanNode')) {
+        $node->isa('CQL::TermNode')
+            ? $self->_parse_term_node($node, $query)
+            : $self->_parse_prox_node($node, $query);
         return $query;
     }
 
-    if ($node->isa('CQL::ProxNode')) { # TODO mapping
-        my $slop = 0;
-        my $qualifier = $node->left->getQualifier;
-        my $term = join ' ', $node->left->getTerm, $node->right->getTerm;
-        if (my ($n) = $node->op =~ $distance_modifier) {
-            $slop = $n - 1 if $n > 1;
+    my @stack = ($node);
+    my @query_stack = (my $q = $query);
+
+    while (@stack) {
+        $node  = shift @stack;
+        $q     = shift @query_stack;
+
+        if ($node->isa('CQL::BooleanNode')) {
+            push @stack, $node->left, $node->right;
+            push @query_stack, my $left = {}, my $right = {};
+            if ($node->op eq 'and') {
+                $q->{bool} = { must => [$left, $right] };
+            } elsif ($node->op eq 'or') {
+                $q->{bool} = { should => [$left, $right] };
+            } else {
+                $q->{bool} = { must => [ $left, { bool => { must_not => [$right] } } ] };
+            }
+        } elsif ($node->isa('CQL::TermNode')) {
+            $self->_parse_term_node($node, $q);
+        } else {
+            $self->_parse_prox_node($node, $q);
         }
-        if ($qualifier =~ $any_field) {
+    }
+
+    $query;
+}
+
+sub _parse_term_node {
+    my ($self, $node, $query) = @_;
+
+    my $term = $node->getTerm;
+
+    if ($term =~ $RE_MATCH_ALL) {
+        return { match_all => {} };
+    }
+
+    my $qualifier = $node->getQualifier;
+    my $relation  = $node->getRelation;
+    my @modifiers = $relation->getModifiers;
+    my $base      = lc $relation->getBase;
+
+    if ($base eq 'scr') {
+        if ($self->mapping and my $rel = $self->mapping->{default_relation}) {
+            $base = $rel;
+        } else {
+            $base = '=';
+        }
+    }
+
+    if ($qualifier =~ $RE_ANY_FIELD) {
+        if ($self->mapping and my $idx = $self->mapping->{default_index}) {
+            $qualifier = $idx;
+        } else {
             $qualifier = '_all';
         }
-
-        return { text_phrase => { $qualifier => { query => $term, slop => $slop } } };
     }
 
-    if ($node->isa('CQL::BooleanNode')) {
-        my $op = lc $node->op;
-        my $bool;
-        if ($op eq 'and') {
-            return { bool => { must => [
-                $self->visit($node->left),
-                $self->visit($node->right)
-            ] } };
+    my $nested;
+
+    if ($self->mapping and my $indexes = $self->mapping->{indexes}) {
+        $qualifier = lc $qualifier;
+        $qualifier =~ s/(?<=[^_])_(?=[^_])//g if $self->mapping->{strip_separating_underscores};
+        my $mapping = $indexes->{$qualifier} or confess "cql error: unknown index $qualifier";
+        $mapping->{op}{$base} or confess "cql error: relation $base not allowed";
+        my $op = $mapping->{op}{$base};
+        if (ref $op && $op->{field}) {
+            $qualifier = $op->{field};
+        } elsif ($mapping->{field}) {
+            $qualifier = $mapping->{field};
         }
 
-        if ($op eq 'or') {
-            return { bool => { should => [
-                $self->visit($node->left),
-                $self->visit($node->right)
-            ] } };
+        my $filters;
+        if (ref $op && $op->{filter}) {
+            $filters = $op->{filter};
+        } elsif ($mapping->{filter}) {
+            $filters = $mapping->{filter};
+        }
+        if ($filters) {
+            for my $filter (@$filters) {
+                given ($filter) {
+                    when ('lowercase') { $term = lc $term }
+                }
+            }
+        }
+        if (ref $op && $op->{cb}) {
+            my ($pkg, $sub) = @{$op->{cb}};
+            $term = require_package($pkg)->$sub($term);
+        } elsif ($mapping->{cb}) {
+            my ($pkg, $sub) = @{$mapping->{cb}};
+            $term = require_package($pkg)->$sub($term);
         }
 
-        { bool => { must => [
-            $self->visit($node->left),
-            { bool => { must_not => [
-                $self->visit($node->right)
-            ] } }
-        ] } };
+        $nested = $mapping->{nested};
     }
+
+    # TODO just pass query around
+    my $es_node = _term_node($base, $qualifier, $term, @modifiers);
+
+    if ($nested) {
+        if ($nested->{query}) {
+            $es_node = { bool => { must => [
+                $nested->{query},
+                $es_node,
+            ] } };
+        }
+        $es_node = { nested => {
+            path  => $nested->{path},
+            query => $es_node,
+        } };
+    }
+
+    for my $key (keys %$es_node) {
+        $query->{$key} = $es_node->{$key};
+    }
+
+    $query;
+}
+
+sub _parse_prox_node {
+    my ($self, $node, $query) = @_;
+
+    my $slop = 0;
+    my $qualifier = $node->left->getQualifier;
+    my $term = join ' ', $node->left->getTerm, $node->right->getTerm;
+    if (my ($n) = $node->op =~ $RE_DISTANCE_MODIFIER) {
+        $slop = $n - 1 if $n > 1;
+    }
+    if ($qualifier =~ $RE_ANY_FIELD) {
+        $qualifier = '_all';
+    }
+
+    $query->{text_phrase} = { $qualifier => { query => $term, slop => $slop } };
 }
 
 sub _term_node {
@@ -331,7 +352,7 @@ This package currently parses most of CQL 1.1:
 
 Parses the given CQL query string with L<CQL::Parser> and converts it to a ElasticSearch query hashref.
 
-=head2 visit
+=head2 parse_node
 
 Converts the given L<CQL::Node> to a ElasticSearch query hashref.
 
