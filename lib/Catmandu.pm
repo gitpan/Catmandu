@@ -28,11 +28,11 @@ L<Catmandu::Introduction>.
 
 =head1 VERSION
 
-Version 0.03
+Version 0.0301
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.0301';
 
 =head1 SYNOPSIS
 
@@ -172,7 +172,7 @@ sub default_load_path {
     $default_path = $path if defined $path;
     $default_path //= do {
         my $script = File::Spec->rel2abs($0);
-        my ($script_vol, $script_path, $script_name) = File::Spec->splitpath($0);
+        my ($script_vol, $script_path, $script_name) = File::Spec->splitpath($script);
         $script_path;
     }
 }
