@@ -24,7 +24,7 @@ provides:
     version: 0
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.0301
+    version: 0.0302
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -228,7 +228,7 @@ provides:
     version: 0
   Dancer::Plugin::Catmandu::OAI:
     file: lib/Dancer/Plugin/Catmandu/OAI.pm
-    version: 0.01
+    version: 0.0101
   Dancer::Plugin::Catmandu::SRU:
     file: lib/Dancer/Plugin/Catmandu/SRU.pm
     version: 0.01
@@ -272,4 +272,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.0301
+version: 0.0302
