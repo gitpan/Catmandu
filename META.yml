@@ -24,7 +24,7 @@ provides:
     version: 0
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.0302
+    version: 0.0303
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -272,4 +272,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.0302
+version: 0.0303
