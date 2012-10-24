@@ -24,7 +24,7 @@ provides:
     version: 0
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.04
+    version: 0.0401
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -208,12 +208,6 @@ provides:
   Catmandu::Store::Hash::Bag:
     file: lib/Catmandu/Store/Hash.pm
     version: 0
-  Catmandu::Store::SBCatDB:
-    file: lib/Catmandu/Store/SBCatDB.pm
-    version: 0
-  Catmandu::Store::SBCatDB::Bag:
-    file: lib/Catmandu/Store/SBCatDB.pm
-    version: 0
   Catmandu::Store::Solr:
     file: lib/Catmandu/Store/Solr.pm
     version: 0
@@ -272,4 +266,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.04
+version: 0.0401

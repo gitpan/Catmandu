@@ -58,7 +58,6 @@ lib/Catmandu/Store.pm
 lib/Catmandu/Store/DBI.pm
 lib/Catmandu/Store/ElasticSearch.pm
 lib/Catmandu/Store/Hash.pm
-lib/Catmandu/Store/SBCatDB.pm
 lib/Catmandu/Store/Solr.pm
 lib/Catmandu/Util.pm
 lib/CQL/ElasticSearch.pm

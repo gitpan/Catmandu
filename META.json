@@ -74,7 +74,7 @@
       },
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.04"
+         "version" : "0.0401"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -320,14 +320,6 @@
          "file" : "lib/Catmandu/Store/Hash.pm",
          "version" : 0
       },
-      "Catmandu::Store::SBCatDB" : {
-         "file" : "lib/Catmandu/Store/SBCatDB.pm",
-         "version" : 0
-      },
-      "Catmandu::Store::SBCatDB::Bag" : {
-         "file" : "lib/Catmandu/Store/SBCatDB.pm",
-         "version" : 0
-      },
       "Catmandu::Store::Solr" : {
          "file" : "lib/Catmandu/Store/Solr.pm",
          "version" : 0
@@ -367,5 +359,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.04"
+   "version" : "0.0401"
 }
