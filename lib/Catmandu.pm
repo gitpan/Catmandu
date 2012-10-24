@@ -28,11 +28,11 @@ L<Catmandu::Introduction>.
 
 =head1 VERSION
 
-Version 0.0303
+Version 0.04
 
 =cut
 
-our $VERSION = '0.0303';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
@@ -60,14 +60,14 @@ the default Catmandu stores and exporters to be used. Here is an example of a
 C<catmandu.yml> file:
 
     store:
-     default:
-      package: ElasticSearch
-       options:
-        index_name: myrepository
+      default:
+        package: ElasticSearch
+        options:
+          index_name: myrepository
 
     exporter:
-     default:
-      package: YAML
+      default:
+        package: YAML
 
 =head2 Split config
 

@@ -12,48 +12,73 @@ use YAML::Any ();
 use JSON ();
 
 our %EXPORT_TAGS = (
-    misc    => [qw(require_package use_lib)],
-    io      => [qw(io read_file read_yaml read_json)],
-    data    => [qw(parse_data_path get_data set_data delete_data data_at)],
-    array   => [qw(array_exists array_group_by array_pluck array_to_sentence
+    io     => [qw(io read_file read_yaml read_json)],
+    data   => [qw(parse_data_path get_data set_data delete_data data_at)],
+    array  => [qw(array_exists array_group_by array_pluck array_to_sentence
         array_sum array_includes array_any array_rest array_uniq)],
-    string  => [qw(as_utf8 trim capitalize)],
-    is      => [qw(is_same is_different)],
-    check   => [qw(check_same check_different)],
+    string => [qw(as_utf8 trim capitalize)],
+    is     => [qw(is_same is_different)],
+    check  => [qw(check_same check_different)],
+    human  => [qw(human_number human_content_type human_byte_size)],
+    xml    => [qw(xml_declaration xml_escape)],
+    misc   => [qw(require_package use_lib)],
 );
 
 our @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 $EXPORT_TAGS{all} = \@EXPORT_OK;
 
-sub use_lib {
-    my (@dirs) = @_;
+my $HUMAN_CONTENT_TYPES = {
+    # txt
+    'text/plain' => 'Text',
+    'application/txt' => 'Text',
+    # pdf
+    'application/pdf' => 'PDF',
+    'application/x-pdf' => 'PDF',
+    'application/acrobat' => 'PDF',
+    'applications/vnd.pdf' => 'PDF',
+    'text/pdf' => 'PDF',
+    'text/x-pdf' => 'PDF',
+    # doc
+    'application/doc' => 'Word',
+    'application/vnd.msword' => 'Word',
+    'application/vnd.ms-word' => 'Word',
+    'application/winword' => 'Word',
+    'application/word' => 'Word',
+    'application/x-msw6' => 'Word',
+    'application/x-msword' => 'Word',
+    # docx
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'Word',
+    # xls
+    'application/vnd.ms-excel' => 'Excel',
+    'application/msexcel' => 'Excel',
+    'application/x-msexcel' => 'Excel',
+    'application/x-ms-excel' => 'Excel',
+    'application/vnd.ms-excel' => 'Excel',
+    'application/x-excel' => 'Excel',
+    'application/x-dos_ms_excel' => 'Excel',
+    'application/xls' => 'Excel',
+    # xlsx
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'Excel',
+    # ppt
+    'application/vnd.ms-powerpoint' => 'PowerPoint',
+    'application/mspowerpoint' => 'PowerPoint',
+    'application/ms-powerpoint' => 'PowerPoint',
+    'application/mspowerpnt' => 'PowerPoint',
+    'application/vnd-mspowerpoint' => 'PowerPoint',
+    'application/powerpoint' => 'PowerPoint',
+    'application/x-powerpoint' => 'PowerPoint',
+    # pptx
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'PowerPoint',
+    # csv
+    'text/comma-separated-values' => 'CSV',
+    'text/csv' => 'CSV',
+    'application/csv' => 'CSV',
+    # zip
+    'application/zip' => 'ZIP archive',
+};
 
-    use lib;
-    lib->import(@dirs);
-    confess $@ if $@;
-
-    1;
-}
-
-sub require_package {
-    my ($pkg, $ns) = @_;
-
-    if ($ns) {
-        unless ($pkg =~ s/^\+// || $pkg =~ /^$ns/) {
-            $pkg = "${ns}::$pkg";
-        }
-    }
-
-    return $pkg if is_invocant($pkg);
-
-    eval "require $pkg;1;" or do {
-        my $err = $@;
-        confess $err;
-    };
-
-    $pkg;
-}
+my $XML_DECLARATION = qq(<?xml version="1.0" encoding="UTF-8"?>\n);
 
 sub io {
     my ($io, %opts) = @_;
@@ -215,13 +240,13 @@ sub array_pluck {
 }
 
 sub array_to_sentence {
-    my ($arr, $join_char, $join_last_char) = @_;
-    $join_char //= ', ';
-    $join_last_char //= ' and ';
+    my ($arr, $join, $join_last) = @_;
+    $join //= ', ';
+    $join_last //= ' and ';
     my $size = scalar @$arr;
     $size > 2
-        ? join($join_last_char, join($join_char, @$arr[0..$size-1]), $arr->[-1])
-        : join($join_last_char, @$arr);
+        ? join($join_last, join($join, @$arr[0..$size-1]), $arr->[-1])
+        : join($join_last, @$arr);
 }
 
 sub array_sum {
@@ -248,7 +273,8 @@ sub array_rest {
 sub array_uniq {
     my ($arr) = @_;
     my %seen = ();
-    [grep { not $seen{$_}++ } @$arr];
+    my @vals = grep { not $seen{$_}++ } @$arr;
+    \@vals;
 }
 
 sub as_utf8 {
@@ -267,10 +293,12 @@ sub trim {
 }
 
 sub capitalize {
-    ucfirst lc as_utf8 $_[0];
+    my $str = $_[0];
+    utf8::upgrade($str);
+    ucfirst lc $str;
 }
 
-sub is_same { goto &Data::Compare::Compare }
+*is_same = \&Data::Compare::Compare;
 
 sub is_different {
     !is_same(@_);
@@ -284,17 +312,17 @@ sub check_different {
     !is_same(@_) || confess('error: should be different');
 }
 
-sub is_invocant { goto &Data::Util::is_invocant }
-sub is_scalar_ref { goto &Data::Util::is_scalar_ref }
-sub is_array_ref { goto &Data::Util::is_array_ref }
-sub is_hash_ref { goto &Data::Util::is_hash_ref }
-sub is_code_ref { goto &Data::Util::is_code_ref }
-sub is_regex_ref { goto &Data::Util::is_rx }
-sub is_glob_ref { goto &Data::Util::is_glob_ref }
-sub is_value { goto &Data::Util::is_value }
-sub is_string { goto &Data::Util::is_string }
-sub is_number { goto &Data::Util::is_number }
-sub is_integer { goto &Data::Util::is_integer }
+*is_invocant = \&Data::Util::is_invocant;
+*is_scalar_ref = \&Data::Util::is_scalar_ref;
+*is_array_ref = \&Data::Util::is_array_ref;
+*is_hash_ref = \&Data::Util::is_hash_ref;
+*is_code_ref = \&Data::Util::is_code_ref;
+*is_regex_ref = \&Data::Util::is_rx;
+*is_glob_ref = \&Data::Util::is_glob_ref;
+*is_value = \&Data::Util::is_value;
+*is_string = \&Data::Util::is_string;
+*is_number = \&Data::Util::is_number;
+*is_integer = \&Data::Util::is_integer;
 
 sub is_natural {
     is_integer($_[0]) && $_[0] >= 0;
@@ -347,4 +375,457 @@ for my $sym (qw(able invocant ref
             unless Data::Util::get_code_ref($pkg, "check_maybe_$sym");
 }
 
+sub human_number { # taken from Number::Format
+    my $num = $_[0];
+    # add leading 0's so length($num) is divisible by 3
+    $num = '0'x(3 - (length($num) % 3)).$num;
+    # split $num into groups of 3 characters and insert commas
+    $num = join ',', grep { $_ ne '' } split /(...)/, $num;
+    # strip off leading zeroes and/or comma
+    $num =~ s/^0+,?//;
+    length $num ? $num : '0';
+}
+
+sub human_byte_size {
+    my ($size) = @_;
+    if ($size > 1000000000) {
+        return sprintf("%.2f GB", $size / 1000000000);
+    } elsif ($size > 1000000) {
+        return sprintf("%.2f MB", $size / 1000000);
+    } elsif ($size > 1000) {
+        return sprintf("%.2f KB", $size / 1000);
+    }
+    "$size bytes";
+}
+
+sub human_content_type {
+    my ($content_type, $default) = @_;
+    my ($key) = $content_type =~ /^([^;]+)/;
+    $HUMAN_CONTENT_TYPES->{$key} // $default // $content_type;
+}
+
+sub xml_declaration {
+    $XML_DECLARATION;
+}
+
+sub xml_escape {
+    my ($str) = @_;
+    utf8::upgrade($str);
+
+    $str =~ s/&/&amp;/go;
+    $str =~ s/</&lt;/go;
+    $str =~ s/>/&gt;/go;
+    $str =~ s/"/&quot;/go;
+    $str =~ s/'/&apos;/go;
+    # remove control chars
+    $str =~ s/[^\x09\x0A\x0D\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]//go;
+
+    $str;
+}
+
+sub use_lib {
+    my (@dirs) = @_;
+
+    use lib;
+    lib->import(@dirs);
+    confess $@ if $@;
+
+    1;
+}
+
+sub require_package {
+    my ($pkg, $ns) = @_;
+
+    if ($ns) {
+        unless ($pkg =~ s/^\+// || $pkg =~ /^$ns/) {
+            $pkg = "${ns}::$pkg";
+        }
+    }
+
+    return $pkg if is_invocant($pkg);
+
+    eval "require $pkg;1;" or do {
+        my $err = $@;
+        confess $err;
+    };
+
+    $pkg;
+}
+
 1;
+
+__END__
+
+=head1 NAME
+
+Catmandu::Util - A collection of utility functions
+
+=head1 SYNOPSIS
+
+    use Catmandu::Util qw(:string);
+
+    $str = trim($str);
+
+=head1 FUNCTIONS
+
+=head2 IO functions
+
+    use Catmandu::Util qw(:io);
+
+=over 4
+
+=item io($io, %opts)
+
+Takes a file path, glob, glob reference, scalar reference or L<IO::Handle>
+object and returns an opened L<IO::Handle> object.
+
+    my $fh = io '/path/to/file';
+
+    my $fh = io *STDIN;
+
+    my $fh = io \*STDOUT, mode => 'w', encoding => ':crlf';
+
+    my $scalar = "";
+    my $fh = io \$scalar, mode => 'w';
+    $fh->print("some text");
+
+Options are:
+
+=over 12
+
+=item mode
+
+Default is C<"r">.
+
+=item encoding
+
+Default is C<":utf8">.
+
+=back
+
+=item read_file($path);
+
+Slurps the file at C<$path> into a string.
+
+    my $str = read_file('/path/to/file.txt');
+
+=item read_yaml($path);
+
+    my $cfg = read_yaml('config.yaml');
+
+=item read_json($path);
+
+    my $cfg = read_json('config.json');
+
+=back
+
+=head2 Array functions
+
+    use Catmandu::Util qw(:array);
+
+A collection of functions that operate on array references.
+
+=over 4
+
+=item array_exists($array, $index)
+
+Returns C<1> if C<$index> is in the bounds of C<$array>
+
+    array_exists(["a", "b"], 2);
+    # => 0
+    array_exists(["a", "b"], 1);
+    # => 1
+
+=item array_group_by($array, $key)
+
+    my $list = [{color => 'black', id => 1},
+                {color => 'white', id => 2},
+                {id => 3},
+                {color => 'black', id => 4}];
+    array_group_by($list, 'color');
+    # => {black => [{color => 'black', id => 1}, {color => 'black', id => 4}],
+    #     white => [{color => 'white', id => 2}]}
+
+=item array_pluck($array, $key)
+
+    my $list = [{id => 1}, {}, {id => 3}];
+    array_pluck($list, 'id');
+    # => [1, undef, 3]
+
+=item array_to_sentence($array)
+
+=item array_to_sentence($array, $join)
+
+=item array_to_sentence($array, $join, $join_last)
+
+    array_to_sentence([1,2,3]);
+    # => "1, 2 and 3"
+    array_to_sentence([1,2,3], ",");
+    # => "1,2 and 3"
+    array_to_sentence([1,2,3], ",", " & ");
+    # => "1,2 & 3"
+
+=item array_sum($array)
+
+    array_sum([1,2,3]);
+    # => 6
+
+=item array_includes($array, $val)
+
+Returns 1 if C<$array> includes a value that is deeply equal to C<$val>, 0
+otherwise. Comparison is done with C<is_same()>.
+
+    array_includes([{color => 'black'}], {color => 'white'});
+    # => 0
+    array_includes([{color => 'black'}], {color => 'black'});
+    # => 1
+
+=item array_any($array, \&sub)
+
+    array_any(["green", "blue"], sub { my $color = $_[0]; $color eq "blue" });
+    # => 1
+
+=item array_rest($array)
+
+Returns a copy of C<$array> without the head.
+
+    array_rest([1,2,3,4]);
+    # => [2,3,4]
+    array_rest([1]);
+    # => []
+
+=item array_uniq($array)
+
+Returns a copy of C<$array> with all duplicates removed. Comparison is done
+with C<is_same()>.
+
+=back
+
+=head2 String functions
+
+    use Catmandu::Util qw(:string);
+
+=over 4
+
+=item as_utf8($str)
+
+Returns a copy of C<$str> flagged as UTF-8.
+
+=item trim($str)
+
+Returns a copy of C<$str> with leading and trailing whitespace removed.
+
+=item capitalize($str)
+
+Equivalent to C<< ucfirst lc as_utf8 $str >>.
+
+=back
+
+=head2 Is functions
+
+    use Catmandu::Util qw(:is);
+
+    is_number(42) ? "it's numeric" : "it's not numeric";
+
+    is_maybe_hash_ref({});
+    # => 1
+    is_maybe_hash_ref(undef);
+    # => 1
+    is_maybe_hash_ref([]);
+    # => 0
+
+A collection of predicate functions that test the type or value of argument
+C<$val>.  Each function (except C<is_same()> and C<is_different>) also has a
+I<maybe> variant that also tests true if C<$val> is undefined.
+
+Returns C<1> or C<0>.
+
+=over 4
+
+=item is_invocant($val)
+
+=item is_maybe_invocant($val)
+
+Tests if C<$val> is callable (is an existing package or blessed object).
+
+=item is_able($val, @method_names)
+
+=item is_maybe_able($val, @method_names)
+
+Tests if C<$val> is callable and has all methods in C<@method_names>.
+
+=item is_ref($val)
+
+=item is_maybe_ref($val)
+
+Tests if C<$val> is a reference. Equivalent to C<< ref $val ? 1 : 0 >>.
+
+=item is_scalar_ref($val)
+
+=item is_maybe_scalar_ref($val)
+
+Tests if C<$val> is a scalar reference.
+
+=item is_array_ref($val)
+
+=item is_maybe_array_ref($val)
+
+Tests if C<$val> is an array reference.
+
+=item is_hash_ref($val)
+
+=item is_maybe_hash_ref($val)
+
+Tests if C<$val> is a hash reference.
+
+=item is_code_ref($val)
+
+=item is_maybe_code_ref($val)
+
+Tests if C<$val> is a subroutine reference.
+
+=item is_regex_ref($val)
+
+=item is_maybe_regex_ref($val)
+
+Tests if C<$val> is a regular expression reference generated by the C<qr//>
+operator.
+
+=item is_glob_ref($val)
+
+=item is_maybe_glob_ref($val)
+
+Tests if C<$val> is a glob reference.
+
+=item is_value($val)
+
+=item is_maybe_value($val)
+
+Tests if C<$val> is a real value (defined, not a reference and not a
+glob.
+
+=item is_string($val)
+
+=item is_maybe_string($val)
+
+Tests if C<$val> is a non-empty string.
+Equivalent to C<< is_value($val) && length($val) > 0 >>.
+
+=item is_number($val)
+
+=item is_maybe_number($val)
+
+Tests if C<$val> is a number.
+
+=item is_integer($val)
+
+=item is_maybe_integer($val)
+
+Tests if C<$val> is an integer.
+
+=item is_natural($val)
+
+=item is_maybe_natural($val)
+
+Tests if C<$val> is an non-negative integer.
+Equivalent to C<< is_integer($val) && $val >= 0 >>.
+
+=item is_positive($val)
+
+=item is_maybe_positive($val)
+
+Tests if C<$val> is a positive integer.
+Equivalent to C<< is_integer($val) && $val >= 1 >>.
+
+=item is_same($val, $other_val)
+
+Tests if C<$val> is deeply equal to C<$other_val>.
+
+=item is_different($val, $other_val)
+
+The opposite of C<is_same()>.
+
+=back
+
+=head2 Human output functions
+
+    use Catmandu::Util qw(:human);
+
+=over 4
+
+=item human_number($num)
+
+Insert a comma a 3-digit intervals to make C<$num> more readable. Only works
+with I<integers> for now.
+
+    human_number(64354);
+    # => "64,354"
+
+=item human_byte_size($size)
+
+    human_byte_size(64);
+    # => "64 bytes"
+    human_byte_size(10005000);
+    # => "10.01 MB"
+
+=item human_content_type($content_type)
+
+=item human_content_type($content_type, $default)
+
+    human_content_type('application/x-dos_ms_excel');
+    # => "Excel"
+    human_content_type('application/zip');
+    # => "ZIP archive"
+    human_content_type('foo/x-unknown');
+    # => "foo/x-unknown"
+    human_content_type('foo/x-unknown', 'Unknown');
+    # => "Unknown"
+
+=back
+
+=head2 XML functions
+
+    use Catmandu::Util qw(:xml);
+
+=over 4
+
+=item xml_declaration()
+
+Returns C<< qq(<?xml version="1.0" encoding="UTF-8"?>\n) >>.
+
+=item xml_escape($str)
+
+Returns an XML escaped copy of C<$str>.
+
+=back
+
+=head2 Miscellaneous functions
+
+=over 4
+
+=item require_package($pkg)
+
+=item require_package($pkg, $namespace)
+
+Load package C<$pkg> at runtime with C<require> and return it's full name.
+
+    my $pkg = require_package('File::Spec');
+    my $dir = $pkg->tmpdir();
+
+    require_package('Util', 'Catmandu');
+    # => "Catmandu::Util"
+    require_package('Catmandu::Util', 'Catmandu');
+    # => "Catmandu::Util"
+
+=item use_lib(@dirs)
+
+Add directories to C<@INC> at runtime.
+
+=back
+
+=head1 SEE ALSO
+
+L<Data::Util>.
+
+=cut
+
