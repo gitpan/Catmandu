@@ -24,7 +24,7 @@ provides:
     version: 0
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.0401
+    version: 0.0402
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -246,13 +246,12 @@ requires:
   Data::SpreadPagination: 0.001002
   Data::UUID: 1.217
   Data::Util: 0.59
-  Data::Visitor::Callback: 0.28
   DateTime: 0.70
   ElasticSearch: 0.50
   IO::String: 1.08
   JSON: 2.51
   LaTeX::Encode: 0.03
-  Moo: 0.091004
+  Moo: 1.0
   Plack: 0.9982
   Plack::Middleware::Session: 0.14
   SRU: 0.99
@@ -266,4 +265,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.0401
+version: 0.0402
