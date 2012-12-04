@@ -36,26 +36,20 @@
             "CGI::Expand" : "2.02",
             "Clone" : "0.31",
             "DBI" : "1.616",
-            "Dancer" : "1.3094",
             "Data::Compare" : "1.22",
             "Data::MessagePack" : "0.39",
             "Data::SpreadPagination" : "0.001002",
             "Data::UUID" : "1.217",
             "Data::Util" : "0.59",
             "DateTime" : "0.70",
-            "ElasticSearch" : "0.50",
             "IO::String" : "1.08",
             "JSON" : "2.51",
             "LaTeX::Encode" : "0.03",
             "Moo" : "1.0",
-            "Plack" : "0.9982",
-            "Plack::Middleware::Session" : "0.14",
-            "SRU" : "0.99",
             "Spreadsheet::WriteExcel" : "2.37",
             "Sub::Exporter" : "0.982",
             "Template" : "2.22",
             "Text::CSV" : "1.21",
-            "WebService::Solr" : "0.16",
             "XML::Atom" : "0.41",
             "YAML::Any" : "0.81",
             "perl" : "v5.10.1"
@@ -63,17 +57,9 @@
       }
    },
    "provides" : {
-      "CQL::ElasticSearch" : {
-         "file" : "lib/CQL/ElasticSearch.pm",
-         "version" : 0
-      },
-      "CQL::Solr" : {
-         "file" : "lib/CQL/Solr.pm",
-         "version" : 0
-      },
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.0402"
+         "version" : "0.05"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -299,18 +285,6 @@
          "file" : "lib/Catmandu/Store/DBI.pm",
          "version" : 0
       },
-      "Catmandu::Store::ElasticSearch" : {
-         "file" : "lib/Catmandu/Store/ElasticSearch.pm",
-         "version" : 0
-      },
-      "Catmandu::Store::ElasticSearch::Bag" : {
-         "file" : "lib/Catmandu/Store/ElasticSearch.pm",
-         "version" : 0
-      },
-      "Catmandu::Store::ElasticSearch::Searcher" : {
-         "file" : "lib/Catmandu/Store/ElasticSearch.pm",
-         "version" : 0
-      },
       "Catmandu::Store::Hash" : {
          "file" : "lib/Catmandu/Store/Hash.pm",
          "version" : 0
@@ -319,37 +293,9 @@
          "file" : "lib/Catmandu/Store/Hash.pm",
          "version" : 0
       },
-      "Catmandu::Store::Solr" : {
-         "file" : "lib/Catmandu/Store/Solr.pm",
-         "version" : 0
-      },
-      "Catmandu::Store::Solr::Bag" : {
-         "file" : "lib/Catmandu/Store/Solr.pm",
-         "version" : 0
-      },
-      "Catmandu::Store::Solr::Searcher" : {
-         "file" : "lib/Catmandu/Store/Solr.pm",
-         "version" : 0
-      },
       "Catmandu::Util" : {
          "file" : "lib/Catmandu/Util.pm",
          "version" : 0
-      },
-      "Dancer::Plugin::Catmandu::OAI" : {
-         "file" : "lib/Dancer/Plugin/Catmandu/OAI.pm",
-         "version" : "0.0101"
-      },
-      "Dancer::Plugin::Catmandu::SRU" : {
-         "file" : "lib/Dancer/Plugin/Catmandu/SRU.pm",
-         "version" : "0.01"
-      },
-      "Dancer::Session::Catmandu" : {
-         "file" : "lib/Dancer/Session/Catmandu.pm",
-         "version" : "0.01"
-      },
-      "Plack::Session::Store::Catmandu" : {
-         "file" : "lib/Plack/Session/Store/Catmandu.pm",
-         "version" : "0.01"
       }
    },
    "release_status" : "stable",
@@ -358,5 +304,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.0402"
+   "version" : "0.05"
 }

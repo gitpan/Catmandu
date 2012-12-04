@@ -56,16 +56,8 @@ lib/Catmandu/Searchable.pm
 lib/Catmandu/Serializer.pm
 lib/Catmandu/Store.pm
 lib/Catmandu/Store/DBI.pm
-lib/Catmandu/Store/ElasticSearch.pm
 lib/Catmandu/Store/Hash.pm
-lib/Catmandu/Store/Solr.pm
 lib/Catmandu/Util.pm
-lib/CQL/ElasticSearch.pm
-lib/CQL/Solr.pm
-lib/Dancer/Plugin/Catmandu/OAI.pm
-lib/Dancer/Plugin/Catmandu/SRU.pm
-lib/Dancer/Session/Catmandu.pm
-lib/Plack/Session/Store/Catmandu.pm
 LICENSE
 Makefile.PL
 MANIFEST			This list of files
@@ -123,9 +115,7 @@ t/Catmandu-Sane.t
 t/Catmandu-Searchable.t
 t/Catmandu-Serializer.t
 t/Catmandu-Store-DBI.t
-t/Catmandu-Store-ElasticSearch.t
 t/Catmandu-Store-Hash.t
-t/Catmandu-Store-Solr.t
 t/Catmandu-Store.t
 t/Catmandu-Util.t
 t/Catmandu.t
