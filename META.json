@@ -5,7 +5,7 @@
       "Patrick Hochstenbach <patrick.hochstenbach@ugent.be>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -23,7 +23,7 @@
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.40"
          }
       },
       "runtime" : {
@@ -42,14 +42,16 @@
             "Data::UUID" : "1.217",
             "Data::Util" : "0.59",
             "DateTime" : "0.70",
-            "IO::String" : "1.08",
+            "IO::Handle::Util" : "0.01",
             "JSON" : "2.51",
             "LaTeX::Encode" : "0.03",
             "Moo" : "1.0",
             "Spreadsheet::WriteExcel" : "2.37",
             "Sub::Exporter" : "0.982",
+            "Sub::Quote" : "0",
             "Template" : "2.22",
             "Text::CSV" : "1.21",
+            "Time::HiRes" : "0",
             "XML::Atom" : "0.41",
             "YAML::Any" : "0.81",
             "perl" : "v5.10.1"
@@ -59,7 +61,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -304,5 +306,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }
