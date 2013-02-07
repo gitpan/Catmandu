@@ -20,6 +20,7 @@ lib/Catmandu/Exporter/XLS.pm
 lib/Catmandu/Exporter/YAML.pm
 lib/Catmandu/Fix.pm
 lib/Catmandu/Fix/add_field.pm
+lib/Catmandu/Fix/append.pm
 lib/Catmandu/Fix/capitalize.pm
 lib/Catmandu/Fix/clone.pm
 lib/Catmandu/Fix/collapse.pm
@@ -28,6 +29,7 @@ lib/Catmandu/Fix/downcase.pm
 lib/Catmandu/Fix/expand.pm
 lib/Catmandu/Fix/join_field.pm
 lib/Catmandu/Fix/move_field.pm
+lib/Catmandu/Fix/prepend.pm
 lib/Catmandu/Fix/remove_field.pm
 lib/Catmandu/Fix/replace_all.pm
 lib/Catmandu/Fix/retain_field.pm
@@ -37,6 +39,10 @@ lib/Catmandu/Fix/substring.pm
 lib/Catmandu/Fix/trim.pm
 lib/Catmandu/Fix/upcase.pm
 lib/Catmandu/Fixable.pm
+lib/Catmandu/FixCondition.pm
+lib/Catmandu/FixCondition/all_match.pm
+lib/Catmandu/FixCondition/any_match.pm
+lib/Catmandu/FixCondition/exists.pm
 lib/Catmandu/Hits.pm
 lib/Catmandu/Importer.pm
 lib/Catmandu/Importer/Atom.pm

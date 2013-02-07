@@ -61,7 +61,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.06"
+         "version" : "0.07"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -143,6 +143,10 @@
          "file" : "lib/Catmandu/Fix/add_field.pm",
          "version" : 0
       },
+      "Catmandu::Fix::append" : {
+         "file" : "lib/Catmandu/Fix/append.pm",
+         "version" : 0
+      },
       "Catmandu::Fix::capitalize" : {
          "file" : "lib/Catmandu/Fix/capitalize.pm",
          "version" : 0
@@ -175,6 +179,10 @@
          "file" : "lib/Catmandu/Fix/move_field.pm",
          "version" : 0
       },
+      "Catmandu::Fix::prepend" : {
+         "file" : "lib/Catmandu/Fix/prepend.pm",
+         "version" : 0
+      },
       "Catmandu::Fix::remove_field" : {
          "file" : "lib/Catmandu/Fix/remove_field.pm",
          "version" : 0
@@ -205,6 +213,22 @@
       },
       "Catmandu::Fix::upcase" : {
          "file" : "lib/Catmandu/Fix/upcase.pm",
+         "version" : 0
+      },
+      "Catmandu::FixCondition" : {
+         "file" : "lib/Catmandu/FixCondition.pm",
+         "version" : 0
+      },
+      "Catmandu::FixCondition::all_match" : {
+         "file" : "lib/Catmandu/FixCondition/all_match.pm",
+         "version" : 0
+      },
+      "Catmandu::FixCondition::any_match" : {
+         "file" : "lib/Catmandu/FixCondition/any_match.pm",
+         "version" : 0
+      },
+      "Catmandu::FixCondition::exists" : {
+         "file" : "lib/Catmandu/FixCondition/exists.pm",
          "version" : 0
       },
       "Catmandu::Fixable" : {
@@ -306,5 +330,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.06"
+   "version" : "0.07"
 }
