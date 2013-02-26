@@ -20,6 +20,7 @@ WriteMakefile
                    'JSON' => '2.51',
                    'LaTeX::Encode' => '0.03',
                    'Moo' => '1.0',
+                   'Perl::Tidy' => 0,
                    'Software::License' => 0,
                    'Spreadsheet::WriteExcel' => '2.37',
                    'Sub::Exporter' => '0.982',

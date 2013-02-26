@@ -18,7 +18,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.07
+    version: 0.08
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -70,11 +70,26 @@ provides:
   Catmandu::Fix:
     file: lib/Catmandu/Fix.pm
     version: 0
+  Catmandu::Fix::Base:
+    file: lib/Catmandu/Fix/Base.pm
+    version: 0
+  Catmandu::Fix::Condition:
+    file: lib/Catmandu/Fix/Condition.pm
+    version: 0
+  Catmandu::Fix::Condition::all_match:
+    file: lib/Catmandu/Fix/Condition/all_match.pm
+    version: 0
+  Catmandu::Fix::Condition::any_match:
+    file: lib/Catmandu/Fix/Condition/any_match.pm
+    version: 0
+  Catmandu::Fix::Condition::exists:
+    file: lib/Catmandu/Fix/Condition/exists.pm
+    version: 0
   Catmandu::Fix::Loader:
-    file: lib/Catmandu/Fix.pm
+    file: lib/Catmandu/Fix/Loader.pm
     version: 0
   Catmandu::Fix::Loader::Env:
-    file: lib/Catmandu/Fix.pm
+    file: lib/Catmandu/Fix/Loader.pm
     version: 0
   Catmandu::Fix::add_field:
     file: lib/Catmandu/Fix/add_field.pm
@@ -132,18 +147,6 @@ provides:
     version: 0
   Catmandu::Fix::upcase:
     file: lib/Catmandu/Fix/upcase.pm
-    version: 0
-  Catmandu::FixCondition:
-    file: lib/Catmandu/FixCondition.pm
-    version: 0
-  Catmandu::FixCondition::all_match:
-    file: lib/Catmandu/FixCondition/all_match.pm
-    version: 0
-  Catmandu::FixCondition::any_match:
-    file: lib/Catmandu/FixCondition/any_match.pm
-    version: 0
-  Catmandu::FixCondition::exists:
-    file: lib/Catmandu/FixCondition/exists.pm
     version: 0
   Catmandu::Fixable:
     file: lib/Catmandu/Fixable.pm
@@ -232,6 +235,7 @@ requires:
   JSON: 2.51
   LaTeX::Encode: 0.03
   Moo: 1.0
+  Perl::Tidy: 0
   Spreadsheet::WriteExcel: 2.37
   Sub::Exporter: 0.982
   Sub::Quote: 0
@@ -243,4 +247,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.07
+version: 0.08
