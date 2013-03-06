@@ -45,7 +45,7 @@
             "IO::Handle::Util" : "0.01",
             "JSON" : "2.51",
             "LaTeX::Encode" : "0.03",
-            "Moo" : "1.0",
+            "Moo" : "1.000008",
             "Perl::Tidy" : "0",
             "Spreadsheet::WriteExcel" : "2.37",
             "Sub::Exporter" : "0.982",
@@ -62,7 +62,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.08"
+         "version" : "0.09"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -98,6 +98,10 @@
       },
       "Catmandu::Exporter" : {
          "file" : "lib/Catmandu/Exporter.pm",
+         "version" : 0
+      },
+      "Catmandu::Exporter::Atom" : {
+         "file" : "lib/Catmandu/Exporter/Atom.pm",
          "version" : 0
       },
       "Catmandu::Exporter::BibTeX" : {
@@ -335,5 +339,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.08"
+   "version" : "0.09"
 }

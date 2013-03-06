@@ -7,10 +7,11 @@ use XML::Atom::Client;
 
 with 'Catmandu::Importer';
 
-my $ENTRY_ATTRS   = [qw(id published updated summary)];
-my $CONTENT_ATTRS = [qw(mode type body)];
-my $PERSON_ATTRS  = [qw(name email uri url homepage)];
-my $LINK_ATTRS    = [qw(rel href hreflang title type length)];
+my $ENTRY_ATTRS    = [qw(id title published updated summary rights)];
+my $CONTENT_ATTRS  = [qw(mode type body)];
+my $PERSON_ATTRS   = [qw(name email uri url homepage)];
+my $LINK_ATTRS     = [qw(rel href hreflang title type length)];
+my $CATEGORY_ATTRS = [qw(term label scheme)];
 
 has url     => (is => 'ro', required => 1);
 has entries => (is => 'ro', init_arg => undef, lazy => 1, builder => '_build_entries');
@@ -34,6 +35,21 @@ sub _build_entries {
                 $entry_data->{author}{$key} = trim($author->$key || next) || next;
             }
         }
+        if (my $contributor = $entry->contributor) {
+            for my $key (@$PERSON_ATTRS) {
+                $entry_data->{contributor}{$key} = trim($contributor->$key || next) || next;
+            }
+        }
+        if (my @category = $entry->category) {
+            $entry_data->{category} = [map {
+                my $category = $_;
+                my $category_data = {};
+                for my $key (@$CATEGORY_ATTRS) {
+                    $category_data->{$key} = trim($category->$key || next) || next;
+                }
+                $category_data;
+            } @category];
+        }
         if (my @links = $entry->link) {
             $entry_data->{link} = [map {
                 my $link = $_;
@@ -44,7 +60,13 @@ sub _build_entries {
                 $link_data;
             } @links];
         }
-
+        for my $node ($entry->elem->childNodes) {
+            my $uri = $node->namespaceURI;
+            next if (! $uri || $uri eq 'http://purl.org/atom/ns#');
+            my $name  = $node->nodeName;
+            my $value = $node->textContent;
+            $entry_data->{$name} = $value;
+        }
         $entry_data;
     } $feed->entries];
 }

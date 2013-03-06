@@ -11,6 +11,7 @@ lib/Catmandu/Cmd/config.pm
 lib/Catmandu/Cmd/data.pm
 lib/Catmandu/Counter.pm
 lib/Catmandu/Exporter.pm
+lib/Catmandu/Exporter/Atom.pm
 lib/Catmandu/Exporter/BibTeX.pm
 lib/Catmandu/Exporter/CSV.pm
 lib/Catmandu/Exporter/JSON.pm
@@ -79,6 +80,7 @@ t/Catmandu-CLI.t
 t/Catmandu-Cmd-data.t
 t/Catmandu-Cmd.t
 t/Catmandu-Counter.t
+t/Catmandu-Exporter-Atom.t
 t/Catmandu-Exporter-BibTeX.t
 t/Catmandu-Exporter-CSV.t
 t/Catmandu-Exporter-JSON.t

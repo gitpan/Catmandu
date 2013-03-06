@@ -19,7 +19,7 @@ WriteMakefile
                    'IO::Handle::Util' => '0.01',
                    'JSON' => '2.51',
                    'LaTeX::Encode' => '0.03',
-                   'Moo' => '1.0',
+                   'Moo' => '1.000008',
                    'Perl::Tidy' => 0,
                    'Software::License' => 0,
                    'Spreadsheet::WriteExcel' => '2.37',

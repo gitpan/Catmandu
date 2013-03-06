@@ -18,7 +18,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.08
+    version: 0.09
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -45,6 +45,9 @@ provides:
     version: 0
   Catmandu::Exporter:
     file: lib/Catmandu/Exporter.pm
+    version: 0
+  Catmandu::Exporter::Atom:
+    file: lib/Catmandu/Exporter/Atom.pm
     version: 0
   Catmandu::Exporter::BibTeX:
     file: lib/Catmandu/Exporter/BibTeX.pm
@@ -234,7 +237,7 @@ requires:
   IO::Handle::Util: 0.01
   JSON: 2.51
   LaTeX::Encode: 0.03
-  Moo: 1.0
+  Moo: 1.000008
   Perl::Tidy: 0
   Spreadsheet::WriteExcel: 2.37
   Sub::Exporter: 0.982
@@ -247,4 +250,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.08
+version: 0.09
