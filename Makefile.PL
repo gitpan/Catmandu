@@ -34,7 +34,6 @@ WriteMakefile
                  },
   'INSTALLDIRS' => 'site',
   'EXE_FILES' => [
-                   'bin/.DS_Store',
                    'bin/catmandu'
                  ],
   'PL_FILES' => {}
