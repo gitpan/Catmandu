@@ -19,8 +19,9 @@ WriteMakefile
                    'IO::Handle::Util' => '0.01',
                    'JSON' => '2.51',
                    'LaTeX::Encode' => '0.03',
+                   'Module::Info' => '0.33',
                    'Moo' => '1.000008',
-                   'Perl::Tidy' => 0,
+                   'MooX::Log::Any' => 0,
                    'Software::License' => 0,
                    'Spreadsheet::WriteExcel' => '2.37',
                    'Sub::Exporter' => '0.982',
@@ -28,9 +29,12 @@ WriteMakefile
                    'Template' => '2.22',
                    'Test::Exception' => '0.31',
                    'Text::CSV' => '1.21',
+                   'Throwable' => 0,
                    'Time::HiRes' => 0,
+                   'Try::Tiny::ByClass' => '0.01',
                    'XML::Atom' => '0.41',
-                   'YAML::Any' => '0.81'
+                   'YAML::Any' => '0.81',
+                   'namespace::clean' => '0.24'
                  },
   'INSTALLDIRS' => 'site',
   'EXE_FILES' => [

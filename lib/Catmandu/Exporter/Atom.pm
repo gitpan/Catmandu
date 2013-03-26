@@ -1,10 +1,11 @@
 package Catmandu::Exporter::Atom;
 
+use namespace::clean;
 use Catmandu::Sane;
-use Moo;
 use XML::Atom::Feed;
 use XML::Atom::Entry;
 use POSIX qw(strftime);
+use Moo;
 
 with 'Catmandu::Exporter';
 
@@ -19,18 +20,22 @@ has rights      => (is => 'ro', default => sub { undef });
 has ns          => (is => 'ro', default => sub { undef });
 
 has link        => (is => 'ro', isa => sub {
-                    die "Link needs to be an array hash" unless ! defined $_[0] || ref $_[0] eq 'ARRAY';
+                    Catmandu::BadArg->throw("Link needs to be an array hash")
+                        unless !defined $_[0] || ref $_[0] eq 'ARRAY';
                  });
 has author      => (is => 'ro', isa => sub {
-                    die "Author needs to be an array hash" unless ! defined $_[0] || ref $_[0] eq 'ARRAY';
+                    Catmandu::BadArg->throw("Author needs to be an array hash")
+                        unless !defined $_[0] || ref $_[0] eq 'ARRAY';
                  });
 has contributor => (is => 'ro', isa => sub {
-                    die "Contributor needs to be an array hash" unless ! defined $_[0] || ref $_[0] eq 'ARRAY';
+                    Catmandu::BadArg->throw("Contributor needs to be an array hash")
+                        unless !defined $_[0] || ref $_[0] eq 'ARRAY';
                  });
 has category    => (is => 'ro', isa => sub {
-                    die "Category needs to be an array hash" unless ! defined $_[0] || ref $_[0] eq 'ARRAY';
+                    Catmandu::BadArg->throw("Category needs to be an array hash")
+                        unless !defined $_[0] || ref $_[0] eq 'ARRAY';
                  });
-                 
+
 has atom        => (is => 'ro', lazy => 1, builder => '_build_atom');
 has extra       => (is => 'ro', default => sub { undef });
 
@@ -109,7 +114,7 @@ sub _build_atom {
     $atom->subtitle($self->subtitle) if defined $self->subtitle;    
     $atom->title($self->title) if defined $self->title;
 
-    my $updated = $self->updated  ? $self->updated  : strftime("%y-%m-%dT%H:%M:%S",gmtime(time));
+    my $updated = $self->updated  ? $self->updated  : strftime("%Y-%m-%dT%H:%M:%SZ",gmtime(time));
     $atom->updated($updated);
     
     if (defined $self->ns) {
@@ -183,7 +188,7 @@ sub add {
         }
     }
     
-    my $published = $data->{published} ? $data->{published} : strftime("%Y-%m-%dT%H:%M:%S", gmtime(time));
+    my $published = $data->{published} ? $data->{published} : strftime("%Y-%m-%dT%H:%M:%SZ", gmtime(time));
     $entry->published($published);
     
     $entry->rights($data->{rights}) if defined $data->{rights};
@@ -191,7 +196,7 @@ sub add {
     $entry->summary($data->{summary}) if defined $data->{summary};
     $entry->title($data->{title}) if defined $data->{title}; 
    
-    my $updated = $data->{updated} ? $data->{updated} : strftime("%Y-%m-%dT%H:%M:%S", gmtime(time));
+    my $updated = $data->{updated} ? $data->{updated} : strftime("%Y-%m-%dT%H:%M:%SZ", gmtime(time));
     $entry->updated($updated);
     
     # Other metadata can be in a namespace
