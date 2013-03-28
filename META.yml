@@ -18,7 +18,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.1
+    version: 0.1001
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -260,7 +260,7 @@ requires:
   Sub::Quote: 0
   Template: 2.22
   Text::CSV: 1.21
-  Throwable: 0
+  Throwable: 0.200004
   Time::HiRes: 0
   Try::Tiny::ByClass: 0.01
   XML::Atom: 0.41
@@ -269,4 +269,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.1
+version: 0.1001

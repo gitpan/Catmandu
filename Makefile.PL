@@ -29,7 +29,7 @@ WriteMakefile
                    'Template' => '2.22',
                    'Test::Exception' => '0.31',
                    'Text::CSV' => '1.21',
-                   'Throwable' => 0,
+                   'Throwable' => '0.200004',
                    'Time::HiRes' => 0,
                    'Try::Tiny::ByClass' => '0.01',
                    'XML::Atom' => '0.41',
