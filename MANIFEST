@@ -8,7 +8,13 @@ lib/Catmandu/Buffer.pm
 lib/Catmandu/CLI.pm
 lib/Catmandu/Cmd.pm
 lib/Catmandu/Cmd/config.pm
+lib/Catmandu/Cmd/convert.pm
+lib/Catmandu/Cmd/count.pm
 lib/Catmandu/Cmd/data.pm
+lib/Catmandu/Cmd/delete.pm
+lib/Catmandu/Cmd/export.pm
+lib/Catmandu/Cmd/import.pm
+lib/Catmandu/Cmd/move.pm
 lib/Catmandu/Counter.pm
 lib/Catmandu/Env.pm
 lib/Catmandu/Error.pm

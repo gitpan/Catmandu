@@ -18,7 +18,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.1003
+    version: 0.2
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -43,8 +43,26 @@ provides:
   Catmandu::Cmd::config:
     file: lib/Catmandu/Cmd/config.pm
     version: 0
+  Catmandu::Cmd::convert:
+    file: lib/Catmandu/Cmd/convert.pm
+    version: 0
+  Catmandu::Cmd::count:
+    file: lib/Catmandu/Cmd/count.pm
+    version: 0
   Catmandu::Cmd::data:
     file: lib/Catmandu/Cmd/data.pm
+    version: 0
+  Catmandu::Cmd::delete:
+    file: lib/Catmandu/Cmd/delete.pm
+    version: 0
+  Catmandu::Cmd::export:
+    file: lib/Catmandu/Cmd/export.pm
+    version: 0
+  Catmandu::Cmd::import:
+    file: lib/Catmandu/Cmd/import.pm
+    version: 0
+  Catmandu::Cmd::move:
+    file: lib/Catmandu/Cmd/move.pm
     version: 0
   Catmandu::Counter:
     file: lib/Catmandu/Counter.pm
@@ -269,4 +287,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.1003
+version: 0.2
