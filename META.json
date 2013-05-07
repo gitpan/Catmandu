@@ -66,10 +66,14 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.2"
+         "version" : "0.2001"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
+         "version" : 0
+      },
+      "Catmandu::ArrayIterator" : {
+         "file" : "lib/Catmandu/ArrayIterator.pm",
          "version" : 0
       },
       "Catmandu::BadArg" : {
@@ -387,5 +391,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.2"
+   "version" : "0.2001"
 }

@@ -18,9 +18,12 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.2
+    version: 0.2001
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
+    version: 0
+  Catmandu::ArrayIterator:
+    file: lib/Catmandu/ArrayIterator.pm
     version: 0
   Catmandu::BadArg:
     file: lib/Catmandu/Error.pm
@@ -287,4 +290,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.2
+version: 0.2001

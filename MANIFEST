@@ -3,6 +3,7 @@ Build.PL
 Changes
 lib/Catmandu.pm
 lib/Catmandu/Addable.pm
+lib/Catmandu/ArrayIterator.pm
 lib/Catmandu/Bag.pm
 lib/Catmandu/Buffer.pm
 lib/Catmandu/CLI.pm
@@ -82,6 +83,7 @@ META.json
 META.yml
 README
 t/Catmandu-Addable.t
+t/Catmandu-ArrayIterator.t
 t/Catmandu-Bag.t
 t/Catmandu-Buffer.t
 t/Catmandu-CLI.t
