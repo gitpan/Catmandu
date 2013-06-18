@@ -18,7 +18,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.2003
+    version: 0.3
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -153,6 +153,9 @@ provides:
     version: 0
   Catmandu::Fix::join_field:
     file: lib/Catmandu/Fix/join_field.pm
+    version: 0
+  Catmandu::Fix::lookup:
+    file: lib/Catmandu/Fix/lookup.pm
     version: 0
   Catmandu::Fix::move_field:
     file: lib/Catmandu/Fix/move_field.pm
@@ -290,4 +293,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.2003
+version: 0.3
