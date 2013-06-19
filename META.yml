@@ -18,7 +18,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.3
+    version: 0.4
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -151,6 +151,9 @@ provides:
   Catmandu::Fix::expand:
     file: lib/Catmandu/Fix/expand.pm
     version: 0
+  Catmandu::Fix::from_json:
+    file: lib/Catmandu/Fix/from_json.pm
+    version: 0
   Catmandu::Fix::join_field:
     file: lib/Catmandu/Fix/join_field.pm
     version: 0
@@ -180,6 +183,9 @@ provides:
     version: 0
   Catmandu::Fix::substring:
     file: lib/Catmandu/Fix/substring.pm
+    version: 0
+  Catmandu::Fix::to_json:
+    file: lib/Catmandu/Fix/to_json.pm
     version: 0
   Catmandu::Fix::trim:
     file: lib/Catmandu/Fix/trim.pm
@@ -293,4 +299,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.3
+version: 0.4

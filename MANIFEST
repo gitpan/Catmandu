@@ -42,6 +42,7 @@ lib/Catmandu/Fix/Condition/exists.pm
 lib/Catmandu/Fix/copy_field.pm
 lib/Catmandu/Fix/downcase.pm
 lib/Catmandu/Fix/expand.pm
+lib/Catmandu/Fix/from_json.pm
 lib/Catmandu/Fix/join_field.pm
 lib/Catmandu/Fix/Loader.pm
 lib/Catmandu/Fix/lookup.pm
@@ -53,6 +54,7 @@ lib/Catmandu/Fix/retain_field.pm
 lib/Catmandu/Fix/set_field.pm
 lib/Catmandu/Fix/split_field.pm
 lib/Catmandu/Fix/substring.pm
+lib/Catmandu/Fix/to_json.pm
 lib/Catmandu/Fix/trim.pm
 lib/Catmandu/Fix/upcase.pm
 lib/Catmandu/Fixable.pm
@@ -108,6 +110,7 @@ t/Catmandu-Fix-collapse.t
 t/Catmandu-Fix-copy_field.t
 t/Catmandu-Fix-downcase.t
 t/Catmandu-Fix-expand.t
+t/Catmandu-Fix-from_json.t
 t/Catmandu-Fix-join_field.t
 t/Catmandu-Fix-move_field.t
 t/Catmandu-Fix-prepend.t
@@ -117,6 +120,7 @@ t/Catmandu-Fix-retain_field.t
 t/Catmandu-Fix-set_field.t
 t/Catmandu-Fix-split_field.t
 t/Catmandu-Fix-substring.t
+t/Catmandu-Fix-to_json.t
 t/Catmandu-Fix-trim.t
 t/Catmandu-Fix-upcase.t
 t/Catmandu-Fix.t
