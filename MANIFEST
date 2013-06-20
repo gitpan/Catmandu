@@ -112,6 +112,7 @@ t/Catmandu-Fix-downcase.t
 t/Catmandu-Fix-expand.t
 t/Catmandu-Fix-from_json.t
 t/Catmandu-Fix-join_field.t
+t/Catmandu-Fix-lookup.t
 t/Catmandu-Fix-move_field.t
 t/Catmandu-Fix-prepend.t
 t/Catmandu-Fix-remove_field.t
@@ -146,4 +147,5 @@ t/Catmandu-Store-Hash.t
 t/Catmandu-Store.t
 t/Catmandu-Util.t
 t/Catmandu.t
+t/planets.csv
 TODO
