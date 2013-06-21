@@ -2,7 +2,8 @@
    "abstract" : "a data toolkit",
    "author" : [
       "Nicolas Steenlant <nicolas.steenlant@ugent.be>",
-      "Patrick Hochstenbach <patrick.hochstenbach@ugent.be>"
+      "Patrick Hochstenbach <patrick.hochstenbach@ugent.be>",
+      "Vitali Peil <vitali.peil@uni-bielefeld.de>"
    ],
    "dynamic_config" : 1,
    "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
@@ -17,8 +18,8 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Software::License" : "0",
-            "Test::Exception" : "0.31"
+            "Test::Exception" : "0",
+            "Test::More" : "0"
          }
       },
       "configure" : {
@@ -35,7 +36,6 @@
             "App::Cmd" : "0.310",
             "CGI::Expand" : "2.02",
             "Clone" : "0.31",
-            "DBI" : "1.616",
             "Data::Compare" : "1.22",
             "Data::MessagePack" : "0.39",
             "Data::SpreadPagination" : "0.001002",
@@ -44,11 +44,8 @@
             "DateTime" : "0.70",
             "IO::Handle::Util" : "0.01",
             "JSON" : "2.51",
-            "LaTeX::Encode" : "0.03",
-            "Module::Info" : "0.33",
             "Moo" : "1.000008",
             "MooX::Log::Any" : "0",
-            "Spreadsheet::WriteExcel" : "2.37",
             "Sub::Exporter" : "0.982",
             "Sub::Quote" : "0",
             "Template" : "2.22",
@@ -56,7 +53,6 @@
             "Throwable" : "0.200004",
             "Time::HiRes" : "0",
             "Try::Tiny::ByClass" : "0.01",
-            "XML::Atom" : "0.41",
             "YAML::Any" : "0.81",
             "namespace::clean" : "0.24",
             "perl" : "v5.10.1"
@@ -66,7 +62,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.4001"
+         "version" : "0.5"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -148,14 +144,6 @@
          "file" : "lib/Catmandu/Exporter.pm",
          "version" : 0
       },
-      "Catmandu::Exporter::Atom" : {
-         "file" : "lib/Catmandu/Exporter/Atom.pm",
-         "version" : 0
-      },
-      "Catmandu::Exporter::BibTeX" : {
-         "file" : "lib/Catmandu/Exporter/BibTeX.pm",
-         "version" : 0
-      },
       "Catmandu::Exporter::CSV" : {
          "file" : "lib/Catmandu/Exporter/CSV.pm",
          "version" : 0
@@ -170,10 +158,6 @@
       },
       "Catmandu::Exporter::Template" : {
          "file" : "lib/Catmandu/Exporter/Template.pm",
-         "version" : 0
-      },
-      "Catmandu::Exporter::XLS" : {
-         "file" : "lib/Catmandu/Exporter/XLS.pm",
          "version" : 0
       },
       "Catmandu::Exporter::YAML" : {
@@ -312,10 +296,6 @@
          "file" : "lib/Catmandu/Importer.pm",
          "version" : 0
       },
-      "Catmandu::Importer::Atom" : {
-         "file" : "lib/Catmandu/Importer/Atom.pm",
-         "version" : 0
-      },
       "Catmandu::Importer::CSV" : {
          "file" : "lib/Catmandu/Importer/CSV.pm",
          "version" : 0
@@ -376,14 +356,6 @@
          "file" : "lib/Catmandu/Store.pm",
          "version" : 0
       },
-      "Catmandu::Store::DBI" : {
-         "file" : "lib/Catmandu/Store/DBI.pm",
-         "version" : 0
-      },
-      "Catmandu::Store::DBI::Bag" : {
-         "file" : "lib/Catmandu/Store/DBI.pm",
-         "version" : 0
-      },
       "Catmandu::Store::Hash" : {
          "file" : "lib/Catmandu/Store/Hash.pm",
          "version" : 0
@@ -403,5 +375,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.4001"
+   "version" : "0.5"
 }

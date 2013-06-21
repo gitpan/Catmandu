@@ -20,13 +20,10 @@ lib/Catmandu/Counter.pm
 lib/Catmandu/Env.pm
 lib/Catmandu/Error.pm
 lib/Catmandu/Exporter.pm
-lib/Catmandu/Exporter/Atom.pm
-lib/Catmandu/Exporter/BibTeX.pm
 lib/Catmandu/Exporter/CSV.pm
 lib/Catmandu/Exporter/JSON.pm
 lib/Catmandu/Exporter/RIS.pm
 lib/Catmandu/Exporter/Template.pm
-lib/Catmandu/Exporter/XLS.pm
 lib/Catmandu/Exporter/YAML.pm
 lib/Catmandu/Fix.pm
 lib/Catmandu/Fix/add_field.pm
@@ -60,7 +57,6 @@ lib/Catmandu/Fix/upcase.pm
 lib/Catmandu/Fixable.pm
 lib/Catmandu/Hits.pm
 lib/Catmandu/Importer.pm
-lib/Catmandu/Importer/Atom.pm
 lib/Catmandu/Importer/CSV.pm
 lib/Catmandu/Importer/JSON.pm
 lib/Catmandu/Importer/Mock.pm
@@ -76,7 +72,6 @@ lib/Catmandu/Sane.pm
 lib/Catmandu/Searchable.pm
 lib/Catmandu/Serializer.pm
 lib/Catmandu/Store.pm
-lib/Catmandu/Store/DBI.pm
 lib/Catmandu/Store/Hash.pm
 lib/Catmandu/Util.pm
 LICENSE
@@ -93,13 +88,10 @@ t/Catmandu-CLI.t
 t/Catmandu-Cmd-data.t
 t/Catmandu-Cmd.t
 t/Catmandu-Counter.t
-t/Catmandu-Exporter-Atom.t
-t/Catmandu-Exporter-BibTeX.t
 t/Catmandu-Exporter-CSV.t
 t/Catmandu-Exporter-JSON.t
 t/Catmandu-Exporter-RIS.t
 t/Catmandu-Exporter-Template.t
-t/Catmandu-Exporter-XLS.t
 t/Catmandu-Exporter-YAML.t
 t/Catmandu-Exporter.t
 t/Catmandu-Fix-add_field.t
@@ -127,7 +119,6 @@ t/Catmandu-Fix-upcase.t
 t/Catmandu-Fix.t
 t/Catmandu-Fixable.t
 t/Catmandu-Hits.t
-t/Catmandu-Importer-Atom.t
 t/Catmandu-Importer-CSV.t
 t/Catmandu-Importer-JSON.t
 t/Catmandu-Importer-Mock.t
@@ -142,7 +133,6 @@ t/Catmandu-Plugin-Versioning.t
 t/Catmandu-Sane.t
 t/Catmandu-Searchable.t
 t/Catmandu-Serializer.t
-t/Catmandu-Store-DBI.t
 t/Catmandu-Store-Hash.t
 t/Catmandu-Store.t
 t/Catmandu-Util.t
