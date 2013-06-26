@@ -19,7 +19,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.5001
+    version: 0.5002
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
     version: 0
@@ -137,6 +137,9 @@ provides:
   Catmandu::Fix::copy_field:
     file: lib/Catmandu/Fix/copy_field.pm
     version: 0
+  Catmandu::Fix::count:
+    file: lib/Catmandu/Fix/count.pm
+    version: 0
   Catmandu::Fix::downcase:
     file: lib/Catmandu/Fix/downcase.pm
     version: 0
@@ -154,6 +157,9 @@ provides:
     version: 0
   Catmandu::Fix::move_field:
     file: lib/Catmandu/Fix/move_field.pm
+    version: 0
+  Catmandu::Fix::nothing:
+    file: lib/Catmandu/Fix/nothing.pm
     version: 0
   Catmandu::Fix::prepend:
     file: lib/Catmandu/Fix/prepend.pm
@@ -277,4 +283,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.5001
+version: 0.5002
