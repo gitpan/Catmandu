@@ -1,3 +1,4 @@
+2
 bin/catmandu
 Build.PL
 Changes
@@ -44,6 +45,7 @@ lib/Catmandu/Fix/from_json.pm
 lib/Catmandu/Fix/join_field.pm
 lib/Catmandu/Fix/Loader.pm
 lib/Catmandu/Fix/lookup.pm
+lib/Catmandu/Fix/lookup_in_store.pm
 lib/Catmandu/Fix/move_field.pm
 lib/Catmandu/Fix/nothing.pm
 lib/Catmandu/Fix/prepend.pm

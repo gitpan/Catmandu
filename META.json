@@ -62,7 +62,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.5002"
+         "version" : "0.5003"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -244,6 +244,10 @@
          "file" : "lib/Catmandu/Fix/lookup.pm",
          "version" : 0
       },
+      "Catmandu::Fix::lookup_in_store" : {
+         "file" : "lib/Catmandu/Fix/lookup_in_store.pm",
+         "version" : 0
+      },
       "Catmandu::Fix::move_field" : {
          "file" : "lib/Catmandu/Fix/move_field.pm",
          "version" : 0
@@ -383,5 +387,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.5002"
+   "version" : "0.5003"
 }
