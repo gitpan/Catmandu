@@ -62,7 +62,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.5004"
+         "version" : "0.6"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -176,6 +176,14 @@
          "file" : "lib/Catmandu/Fix/Condition.pm",
          "version" : 0
       },
+      "Catmandu::Fix::Condition::SimpleAllTest" : {
+         "file" : "lib/Catmandu/Fix/Condition/SimpleAllTest.pm",
+         "version" : 0
+      },
+      "Catmandu::Fix::Condition::SimpleAnyTest" : {
+         "file" : "lib/Catmandu/Fix/Condition/SimpleAnyTest.pm",
+         "version" : 0
+      },
       "Catmandu::Fix::Condition::all_match" : {
          "file" : "lib/Catmandu/Fix/Condition/all_match.pm",
          "version" : 0
@@ -198,6 +206,10 @@
       },
       "Catmandu::Fix::add_field" : {
          "file" : "lib/Catmandu/Fix/add_field.pm",
+         "version" : 0
+      },
+      "Catmandu::Fix::add_to_store" : {
+         "file" : "lib/Catmandu/Fix/add_to_store.pm",
          "version" : 0
       },
       "Catmandu::Fix::append" : {
@@ -282,6 +294,10 @@
       },
       "Catmandu::Fix::substring" : {
          "file" : "lib/Catmandu/Fix/substring.pm",
+         "version" : 0
+      },
+      "Catmandu::Fix::sum" : {
+         "file" : "lib/Catmandu/Fix/sum.pm",
          "version" : 0
       },
       "Catmandu::Fix::to_json" : {
@@ -387,5 +403,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.5004"
+   "version" : "0.6"
 }
