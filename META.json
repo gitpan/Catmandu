@@ -62,7 +62,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.7001"
+         "version" : "0.7002"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -403,5 +403,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.7001"
+   "version" : "0.7002"
 }
