@@ -6,7 +6,7 @@
       "Vitali Peil <vitali.peil@uni-bielefeld.de>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -62,7 +62,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.7002"
+         "version" : "0.8"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm",
@@ -403,5 +403,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.7002"
+   "version" : "0.8"
 }
