@@ -3,38 +3,38 @@ require 5.010001;
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-  'PL_FILES' => {},
-  'INSTALLDIRS' => 'site',
   'NAME' => 'Catmandu',
+  'VERSION_FROM' => 'lib/Catmandu.pm',
+  'PREREQ_PM' => {
+                   'App::Cmd' => '0.310',
+                   'CGI::Expand' => '2.02',
+                   'Clone' => '0.31',
+                   'Data::Compare' => '1.22',
+                   'Data::MessagePack' => '0.39',
+                   'Data::SpreadPagination' => '0.001002',
+                   'Data::UUID' => '1.217',
+                   'Data::Util' => '0.59',
+                   'DateTime' => '0.70',
+                   'IO::Handle::Util' => '0.01',
+                   'JSON' => '2.51',
+                   'Moo' => '1.000008',
+                   'MooX::Log::Any' => 0,
+                   'Sub::Exporter' => '0.982',
+                   'Sub::Quote' => 0,
+                   'Template' => '2.22',
+                   'Test::Exception' => 0,
+                   'Test::More' => 0,
+                   'Text::CSV' => '1.21',
+                   'Throwable' => '0.200004',
+                   'Time::HiRes' => 0,
+                   'Try::Tiny::ByClass' => '0.01',
+                   'YAML::Any' => '0.81',
+                   'namespace::clean' => '0.24'
+                 },
+  'INSTALLDIRS' => 'site',
   'EXE_FILES' => [
                    'bin/catmandu'
                  ],
-  'VERSION_FROM' => 'lib/Catmandu.pm',
-  'PREREQ_PM' => {
-                   'DateTime' => '0.70',
-                   'App::Cmd' => '0.310',
-                   'Text::CSV' => '1.21',
-                   'Sub::Exporter' => '0.982',
-                   'Sub::Quote' => 0,
-                   'YAML::Any' => '0.81',
-                   'IO::Handle::Util' => '0.01',
-                   'Data::SpreadPagination' => '0.001002',
-                   'Data::MessagePack' => '0.39',
-                   'Test::Exception' => 0,
-                   'Try::Tiny::ByClass' => '0.01',
-                   'Moo' => '1.000008',
-                   'Time::HiRes' => 0,
-                   'Template' => '2.22',
-                   'CGI::Expand' => '2.02',
-                   'Data::Util' => '0.59',
-                   'Data::UUID' => '1.217',
-                   'namespace::clean' => '0.24',
-                   'Test::More' => 0,
-                   'Throwable' => '0.200004',
-                   'Data::Compare' => '1.22',
-                   'Clone' => '0.31',
-                   'JSON' => '2.51',
-                   'MooX::Log::Any' => 0
-                 }
+  'PL_FILES' => {}
 )
 ;

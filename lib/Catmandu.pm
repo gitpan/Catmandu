@@ -27,13 +27,21 @@ local needs.
 Read an in depth introduction into Catmandu programming in
 L<Catmandu::Introduction>.
 
+=head1 ONE STEP INSTALL
+
+To install all Catmandu components in one easy step:
+
+    cpan Task::Catmandu
+    # or
+    cpanm --interactive Task::Catmandu
+
 =head1 VERSION
 
-Version 0.8
+Version 0.8001
 
 =cut
 
-our $VERSION = '0.8';
+our $VERSION = '0.8001';
 
 =head1 SYNOPSIS
 
