@@ -10,7 +10,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.40
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.132830'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -19,256 +19,173 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.8002
+    version: 0.8003
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
-    version: 0
   Catmandu::ArrayIterator:
     file: lib/Catmandu/ArrayIterator.pm
-    version: 0
   Catmandu::BadArg:
     file: lib/Catmandu/Error.pm
-    version: 0
   Catmandu::BadVal:
     file: lib/Catmandu/Error.pm
-    version: 0
   Catmandu::Bag:
     file: lib/Catmandu/Bag.pm
-    version: 0
   Catmandu::Buffer:
     file: lib/Catmandu/Buffer.pm
-    version: 0
   Catmandu::CLI:
     file: lib/Catmandu/CLI.pm
-    version: 0
   Catmandu::Cmd:
     file: lib/Catmandu/Cmd.pm
-    version: 0
   Catmandu::Cmd::config:
     file: lib/Catmandu/Cmd/config.pm
-    version: 0
   Catmandu::Cmd::convert:
     file: lib/Catmandu/Cmd/convert.pm
-    version: 0
   Catmandu::Cmd::count:
     file: lib/Catmandu/Cmd/count.pm
-    version: 0
   Catmandu::Cmd::data:
     file: lib/Catmandu/Cmd/data.pm
-    version: 0
   Catmandu::Cmd::delete:
     file: lib/Catmandu/Cmd/delete.pm
-    version: 0
   Catmandu::Cmd::export:
     file: lib/Catmandu/Cmd/export.pm
-    version: 0
   Catmandu::Cmd::import:
     file: lib/Catmandu/Cmd/import.pm
-    version: 0
   Catmandu::Cmd::move:
     file: lib/Catmandu/Cmd/move.pm
-    version: 0
   Catmandu::Counter:
     file: lib/Catmandu/Counter.pm
-    version: 0
   Catmandu::Env:
     file: lib/Catmandu/Env.pm
-    version: 0
   Catmandu::Error:
     file: lib/Catmandu/Error.pm
-    version: 0
   Catmandu::Exporter:
     file: lib/Catmandu/Exporter.pm
-    version: 0
   Catmandu::Exporter::CSV:
     file: lib/Catmandu/Exporter/CSV.pm
-    version: 0
   Catmandu::Exporter::JSON:
     file: lib/Catmandu/Exporter/JSON.pm
-    version: 0
   Catmandu::Exporter::RIS:
     file: lib/Catmandu/Exporter/RIS.pm
-    version: 0
   Catmandu::Exporter::Template:
     file: lib/Catmandu/Exporter/Template.pm
-    version: 0
   Catmandu::Exporter::YAML:
     file: lib/Catmandu/Exporter/YAML.pm
-    version: 0
   Catmandu::Fix:
     file: lib/Catmandu/Fix.pm
-    version: 0
   Catmandu::Fix::Base:
     file: lib/Catmandu/Fix/Base.pm
-    version: 0
   Catmandu::Fix::Condition:
     file: lib/Catmandu/Fix/Condition.pm
-    version: 0
   Catmandu::Fix::Condition::SimpleAllTest:
     file: lib/Catmandu/Fix/Condition/SimpleAllTest.pm
-    version: 0
   Catmandu::Fix::Condition::SimpleAnyTest:
     file: lib/Catmandu/Fix/Condition/SimpleAnyTest.pm
-    version: 0
   Catmandu::Fix::Condition::all_match:
     file: lib/Catmandu/Fix/Condition/all_match.pm
-    version: 0
   Catmandu::Fix::Condition::any_match:
     file: lib/Catmandu/Fix/Condition/any_match.pm
-    version: 0
   Catmandu::Fix::Condition::exists:
     file: lib/Catmandu/Fix/Condition/exists.pm
-    version: 0
   Catmandu::Fix::Loader:
     file: lib/Catmandu/Fix/Loader.pm
-    version: 0
   Catmandu::Fix::Loader::Env:
     file: lib/Catmandu/Fix/Loader.pm
-    version: 0
   Catmandu::Fix::add_field:
     file: lib/Catmandu/Fix/add_field.pm
-    version: 0
   Catmandu::Fix::add_to_store:
     file: lib/Catmandu/Fix/add_to_store.pm
-    version: 0
   Catmandu::Fix::append:
     file: lib/Catmandu/Fix/append.pm
-    version: 0
   Catmandu::Fix::capitalize:
     file: lib/Catmandu/Fix/capitalize.pm
-    version: 0
   Catmandu::Fix::clone:
     file: lib/Catmandu/Fix/clone.pm
-    version: 0
   Catmandu::Fix::collapse:
     file: lib/Catmandu/Fix/collapse.pm
-    version: 0
   Catmandu::Fix::copy_field:
     file: lib/Catmandu/Fix/copy_field.pm
-    version: 0
   Catmandu::Fix::count:
     file: lib/Catmandu/Fix/count.pm
-    version: 0
   Catmandu::Fix::downcase:
     file: lib/Catmandu/Fix/downcase.pm
-    version: 0
   Catmandu::Fix::expand:
     file: lib/Catmandu/Fix/expand.pm
-    version: 0
   Catmandu::Fix::from_json:
     file: lib/Catmandu/Fix/from_json.pm
-    version: 0
   Catmandu::Fix::join_field:
     file: lib/Catmandu/Fix/join_field.pm
-    version: 0
   Catmandu::Fix::lookup:
     file: lib/Catmandu/Fix/lookup.pm
-    version: 0
   Catmandu::Fix::lookup_in_store:
     file: lib/Catmandu/Fix/lookup_in_store.pm
-    version: 0
   Catmandu::Fix::move_field:
     file: lib/Catmandu/Fix/move_field.pm
-    version: 0
   Catmandu::Fix::nothing:
     file: lib/Catmandu/Fix/nothing.pm
-    version: 0
   Catmandu::Fix::prepend:
     file: lib/Catmandu/Fix/prepend.pm
-    version: 0
   Catmandu::Fix::remove_field:
     file: lib/Catmandu/Fix/remove_field.pm
-    version: 0
   Catmandu::Fix::replace_all:
     file: lib/Catmandu/Fix/replace_all.pm
-    version: 0
   Catmandu::Fix::retain_field:
     file: lib/Catmandu/Fix/retain_field.pm
-    version: 0
   Catmandu::Fix::set_field:
     file: lib/Catmandu/Fix/set_field.pm
-    version: 0
   Catmandu::Fix::split_field:
     file: lib/Catmandu/Fix/split_field.pm
-    version: 0
   Catmandu::Fix::substring:
     file: lib/Catmandu/Fix/substring.pm
-    version: 0
   Catmandu::Fix::sum:
     file: lib/Catmandu/Fix/sum.pm
-    version: 0
   Catmandu::Fix::to_json:
     file: lib/Catmandu/Fix/to_json.pm
-    version: 0
   Catmandu::Fix::trim:
     file: lib/Catmandu/Fix/trim.pm
-    version: 0
   Catmandu::Fix::upcase:
     file: lib/Catmandu/Fix/upcase.pm
-    version: 0
   Catmandu::Fixable:
     file: lib/Catmandu/Fixable.pm
-    version: 0
   Catmandu::Hits:
     file: lib/Catmandu/Hits.pm
-    version: 0
   Catmandu::Importer:
     file: lib/Catmandu/Importer.pm
-    version: 0
   Catmandu::Importer::CSV:
     file: lib/Catmandu/Importer/CSV.pm
-    version: 0
   Catmandu::Importer::JSON:
     file: lib/Catmandu/Importer/JSON.pm
-    version: 0
   Catmandu::Importer::Mock:
     file: lib/Catmandu/Importer/Mock.pm
-    version: 0
   Catmandu::Importer::YAML:
     file: lib/Catmandu/Importer/YAML.pm
-    version: 0
   Catmandu::Iterable:
     file: lib/Catmandu/Iterable.pm
-    version: 0
   Catmandu::Iterator:
     file: lib/Catmandu/Iterator.pm
-    version: 0
   Catmandu::NotImplemented:
     file: lib/Catmandu/Error.pm
-    version: 0
   Catmandu::Paged:
     file: lib/Catmandu/Paged.pm
-    version: 0
   Catmandu::Pluggable:
     file: lib/Catmandu/Pluggable.pm
-    version: 0
   Catmandu::Plugin::Datestamps:
     file: lib/Catmandu/Plugin/Datestamps.pm
-    version: 0
   Catmandu::Plugin::Versioning:
     file: lib/Catmandu/Plugin/Versioning.pm
-    version: 0
   Catmandu::Sane:
     file: lib/Catmandu/Sane.pm
-    version: 0
   Catmandu::Searchable:
     file: lib/Catmandu/Searchable.pm
-    version: 0
   Catmandu::Serializer:
     file: lib/Catmandu/Serializer.pm
-    version: 0
   Catmandu::Store:
     file: lib/Catmandu/Store.pm
-    version: 0
   Catmandu::Store::Hash:
     file: lib/Catmandu/Store/Hash.pm
-    version: 0
   Catmandu::Store::Hash::Bag:
     file: lib/Catmandu/Store/Hash.pm
-    version: 0
   Catmandu::Util:
     file: lib/Catmandu/Util.pm
-    version: 0
 recommends:
   JSON::XS: 2.3
   YAML::XS: 0.34
@@ -298,4 +215,4 @@ requires:
   perl: v5.10.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.8002
+version: 0.8003
