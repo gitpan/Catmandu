@@ -37,7 +37,6 @@
             "CGI::Expand" : "2.02",
             "Clone" : "0.31",
             "Data::Compare" : "1.22",
-            "Data::MessagePack" : "0.39",
             "Data::UUID" : "1.217",
             "Data::Util" : "0.59",
             "IO::Handle::Util" : "0.01",
@@ -60,7 +59,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.8006"
+         "version" : "0.8007"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm"
@@ -302,6 +301,9 @@
       "Catmandu::Serializer" : {
          "file" : "lib/Catmandu/Serializer.pm"
       },
+      "Catmandu::Serializer::json" : {
+         "file" : "lib/Catmandu/Serializer/json.pm"
+      },
       "Catmandu::Store" : {
          "file" : "lib/Catmandu/Store.pm"
       },
@@ -328,5 +330,5 @@
          "url" : "https://github.com/LibreCat/Catmandu.git"
       }
    },
-   "version" : "0.8006"
+   "version" : "0.8007"
 }
