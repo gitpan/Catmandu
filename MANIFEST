@@ -45,6 +45,7 @@ lib/Catmandu/Fix/copy_field.pm
 lib/Catmandu/Fix/count.pm
 lib/Catmandu/Fix/downcase.pm
 lib/Catmandu/Fix/expand.pm
+lib/Catmandu/Fix/expand_date.pm
 lib/Catmandu/Fix/from_json.pm
 lib/Catmandu/Fix/join_field.pm
 lib/Catmandu/Fix/Loader.pm
@@ -94,7 +95,14 @@ t/Catmandu-ArrayIterator.t
 t/Catmandu-Bag.t
 t/Catmandu-Buffer.t
 t/Catmandu-CLI.t
+t/Catmandu-Cmd-config.t
+t/Catmandu-Cmd-convert.t
+t/Catmandu-Cmd-count.t
 t/Catmandu-Cmd-data.t
+t/Catmandu-Cmd-delete.t
+t/Catmandu-Cmd-export.t
+t/Catmandu-Cmd-import.t
+t/Catmandu-Cmd-move.t
 t/Catmandu-Cmd.t
 t/Catmandu-Counter.t
 t/Catmandu-Exporter-CSV.t
@@ -106,6 +114,7 @@ t/Catmandu-Exporter.t
 t/Catmandu-Fix-add_field.t
 t/Catmandu-Fix-add_to_store.t
 t/Catmandu-Fix-append.t
+t/Catmandu-Fix-Base.t
 t/Catmandu-Fix-capitalize.t
 t/Catmandu-Fix-clone.t
 t/Catmandu-Fix-collapse.t
@@ -113,9 +122,11 @@ t/Catmandu-Fix-copy_field.t
 t/Catmandu-Fix-count.t
 t/Catmandu-Fix-downcase.t
 t/Catmandu-Fix-expand.t
+t/Catmandu-Fix-expand_date.t
 t/Catmandu-Fix-from_json.t
 t/Catmandu-Fix-join_field.t
 t/Catmandu-Fix-lookup.t
+t/Catmandu-Fix-lookup_in_store.t
 t/Catmandu-Fix-move_field.t
 t/Catmandu-Fix-nothing.t
 t/Catmandu-Fix-prepend.t
@@ -125,6 +136,7 @@ t/Catmandu-Fix-retain_field.t
 t/Catmandu-Fix-set_field.t
 t/Catmandu-Fix-split_field.t
 t/Catmandu-Fix-substring.t
+t/Catmandu-Fix-sum.t
 t/Catmandu-Fix-to_json.t
 t/Catmandu-Fix-trim.t
 t/Catmandu-Fix-upcase.t
@@ -149,5 +161,6 @@ t/Catmandu-Store-Hash.t
 t/Catmandu-Store.t
 t/Catmandu-Util.t
 t/Catmandu.t
+t/lib/Catmandu/Importer/Values.pm
 t/planets.csv
 TODO

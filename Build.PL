@@ -21,10 +21,8 @@ my $build = Module::Build->new(
         'Clone' => '0.31',
         'Data::Compare' => '1.22',
         'Data::MessagePack' => '0.39',
-        'Data::SpreadPagination' => '0.1.2',
         'Data::UUID' => '1.217',
         'Data::Util' => '0.59',
-        'DateTime' => '0.70',
         'IO::Handle::Util' => '0.01',
         'JSON' => '2.51',
         'Moo' => '1.000008',
@@ -55,6 +53,13 @@ my $build = Module::Build->new(
         Catmandu-*
     )],
     create_makefile_pl => 'traditional',
+    meta_merge => {
+         resources => {
+              repository => 'https://github.com/LibreCat/Catmandu.git',
+              bugtracker => 'https://github.com/LibreCat/Catmandu/issues',
+              homepage => 'https://github.com/LibreCat/Catmandu',
+        },
+    },
 );
 
 $build->create_build_script;

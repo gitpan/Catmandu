@@ -20,9 +20,9 @@ such as MongoDB and full text indexes such as Solr to create a rapid
 development environment for digital library services such as institutional
 repositories and search engines.
 
-In the LibreCat project it is our goal to provide in open source a set of
-programming components to build up digital libraries services suited to your
-local needs.
+In the L<http://librecat.org/|LibreCat> project it is our goal to provide an 
+open source set of programming components to build up digital libraries 
+services suited to your local needs.
 
 Read an in depth introduction into Catmandu programming in
 L<Catmandu::Introduction>.
@@ -37,11 +37,11 @@ To install all Catmandu components in one easy step:
 
 =head1 VERSION
 
-Version 0.8005
+Version 0.8006
 
 =cut
 
-our $VERSION = '0.8005';
+our $VERSION = '0.8006';
 
 =head1 SYNOPSIS
 
@@ -214,8 +214,8 @@ sub default_store { $_[0]->_env->default_store }
 
 =head2 store([NAME])
 
-Return an instance of a store with name NAME or use the default store when no
-name is provided.  The NAME is set in the configuration file. E.g.
+Return an instance of L<Catmandu::Store> with name NAME or use the default store
+when no name is provided.  The NAME is set in the configuration file. E.g.
 
  store:
   default:
@@ -234,6 +234,7 @@ In your program:
     Catmandu->store('test')->bag->search(...);
 
 =cut
+
 sub store {
     my $class = shift;
     $class->_env->store(@_);

@@ -8,9 +8,9 @@ build_requires:
   Test::Exception: 0
   Test::More: 0
 configure_requires:
-  Module::Build: 0.40
+  Module::Build: 0.42
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.132830'
+generated_by: 'Module::Build version 0.4203, CPAN::Meta::Converter version 2.133380'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -19,7 +19,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.8005
+    version: 0.8006
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
   Catmandu::ArrayIterator:
@@ -110,6 +110,8 @@ provides:
     file: lib/Catmandu/Fix/downcase.pm
   Catmandu::Fix::expand:
     file: lib/Catmandu/Fix/expand.pm
+  Catmandu::Fix::expand_date:
+    file: lib/Catmandu/Fix/expand_date.pm
   Catmandu::Fix::from_json:
     file: lib/Catmandu/Fix/from_json.pm
   Catmandu::Fix::join_field:
@@ -195,10 +197,8 @@ requires:
   Clone: 0.31
   Data::Compare: 1.22
   Data::MessagePack: 0.39
-  Data::SpreadPagination: 0.001002
   Data::UUID: 1.217
   Data::Util: 0.59
-  DateTime: 0.70
   IO::Handle::Util: 0.01
   JSON: 2.51
   Moo: 1.000008
@@ -214,5 +214,8 @@ requires:
   namespace::clean: 0.24
   perl: v5.10.1
 resources:
+  bugtracker: https://github.com/LibreCat/Catmandu/issues
+  homepage: https://github.com/LibreCat/Catmandu
   license: http://dev.perl.org/licenses/
-version: 0.8005
+  repository: https://github.com/LibreCat/Catmandu.git
+version: 0.8006
