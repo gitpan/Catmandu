@@ -19,7 +19,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.8007
+    version: 0.8008
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
   Catmandu::ArrayIterator:
@@ -66,8 +66,6 @@ provides:
     file: lib/Catmandu/Exporter/JSON.pm
   Catmandu::Exporter::RIS:
     file: lib/Catmandu/Exporter/RIS.pm
-  Catmandu::Exporter::Template:
-    file: lib/Catmandu/Exporter/Template.pm
   Catmandu::Exporter::YAML:
     file: lib/Catmandu/Exporter/YAML.pm
   Catmandu::Fix:
@@ -206,7 +204,6 @@ requires:
   MooX::Log::Any: 0
   Sub::Exporter: 0.982
   Sub::Quote: 0
-  Template: 2.22
   Text::CSV: 1.21
   Throwable: 0.200004
   Time::HiRes: 0
@@ -219,4 +216,4 @@ resources:
   homepage: https://github.com/LibreCat/Catmandu
   license: http://dev.perl.org/licenses/
   repository: https://github.com/LibreCat/Catmandu.git
-version: 0.8007
+version: 0.8008

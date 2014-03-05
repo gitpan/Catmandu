@@ -18,7 +18,6 @@ WriteMakefile
                    'MooX::Log::Any' => 0,
                    'Sub::Exporter' => '0.982',
                    'Sub::Quote' => 0,
-                   'Template' => '2.22',
                    'Test::Exception' => 0,
                    'Test::More' => 0,
                    'Text::CSV' => '1.21',

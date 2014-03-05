@@ -25,7 +25,6 @@ lib/Catmandu/Exporter.pm
 lib/Catmandu/Exporter/CSV.pm
 lib/Catmandu/Exporter/JSON.pm
 lib/Catmandu/Exporter/RIS.pm
-lib/Catmandu/Exporter/Template.pm
 lib/Catmandu/Exporter/YAML.pm
 lib/Catmandu/Fix.pm
 lib/Catmandu/Fix/add_field.pm
@@ -109,7 +108,6 @@ t/Catmandu-Counter.t
 t/Catmandu-Exporter-CSV.t
 t/Catmandu-Exporter-JSON.t
 t/Catmandu-Exporter-RIS.t
-t/Catmandu-Exporter-Template.t
 t/Catmandu-Exporter-YAML.t
 t/Catmandu-Exporter.t
 t/Catmandu-Fix-add_field.t
