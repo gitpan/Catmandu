@@ -58,7 +58,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.8008"
+         "version" : "0.8009"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm"
@@ -326,5 +326,5 @@
          "url" : "https://github.com/LibreCat/Catmandu.git"
       }
    },
-   "version" : "0.8008"
+   "version" : "0.8009"
 }
