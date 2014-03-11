@@ -24,7 +24,7 @@ WriteMakefile
                    'Throwable' => '0.200004',
                    'Time::HiRes' => 0,
                    'Try::Tiny::ByClass' => '0.01',
-                   'YAML::Any' => '0.81',
+                   'YAML::Any' => '0.90',
                    'namespace::clean' => '0.24'
                  },
   'INSTALLDIRS' => 'site',

@@ -57,6 +57,7 @@ lib/Catmandu/Fix/remove_field.pm
 lib/Catmandu/Fix/replace_all.pm
 lib/Catmandu/Fix/retain_field.pm
 lib/Catmandu/Fix/set_field.pm
+lib/Catmandu/Fix/sort_field.pm
 lib/Catmandu/Fix/split_field.pm
 lib/Catmandu/Fix/substring.pm
 lib/Catmandu/Fix/sum.pm
@@ -133,6 +134,7 @@ t/Catmandu-Fix-remove_field.t
 t/Catmandu-Fix-replace_all.t
 t/Catmandu-Fix-retain_field.t
 t/Catmandu-Fix-set_field.t
+t/Catmandu-Fix-sort_field.t
 t/Catmandu-Fix-split_field.t
 t/Catmandu-Fix-substring.t
 t/Catmandu-Fix-sum.t

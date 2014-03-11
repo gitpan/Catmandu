@@ -49,7 +49,7 @@
             "Throwable" : "0.200004",
             "Time::HiRes" : "0",
             "Try::Tiny::ByClass" : "0.01",
-            "YAML::Any" : "0.81",
+            "YAML::Any" : "0.90",
             "namespace::clean" : "0.24",
             "perl" : "v5.10.1"
          }
@@ -58,7 +58,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.8009"
+         "version" : "0.8010"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm"
@@ -228,6 +228,9 @@
       "Catmandu::Fix::set_field" : {
          "file" : "lib/Catmandu/Fix/set_field.pm"
       },
+      "Catmandu::Fix::sort_field" : {
+         "file" : "lib/Catmandu/Fix/sort_field.pm"
+      },
       "Catmandu::Fix::split_field" : {
          "file" : "lib/Catmandu/Fix/split_field.pm"
       },
@@ -326,5 +329,5 @@
          "url" : "https://github.com/LibreCat/Catmandu.git"
       }
    },
-   "version" : "0.8009"
+   "version" : "0.8010"
 }
