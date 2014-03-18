@@ -5,6 +5,7 @@ author:
   - 'Patrick Hochstenbach <patrick.hochstenbach@ugent.be>'
   - 'Vitali Peil <vitali.peil@uni-bielefeld.de>'
 build_requires:
+  Log::Any::Adapter: 0
   Test::Exception: 0
   Test::More: 0
 configure_requires:
@@ -19,7 +20,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.8010
+    version: 0.8011
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
   Catmandu::ArrayIterator:
@@ -94,6 +95,8 @@ provides:
     file: lib/Catmandu/Fix/add_to_store.pm
   Catmandu::Fix::append:
     file: lib/Catmandu/Fix/append.pm
+  Catmandu::Fix::array:
+    file: lib/Catmandu/Fix/array.pm
   Catmandu::Fix::capitalize:
     file: lib/Catmandu/Fix/capitalize.pm
   Catmandu::Fix::clone:
@@ -112,6 +115,8 @@ provides:
     file: lib/Catmandu/Fix/expand_date.pm
   Catmandu::Fix::from_json:
     file: lib/Catmandu/Fix/from_json.pm
+  Catmandu::Fix::hash:
+    file: lib/Catmandu/Fix/hash.pm
   Catmandu::Fix::join_field:
     file: lib/Catmandu/Fix/join_field.pm
   Catmandu::Fix::lookup:
@@ -218,4 +223,4 @@ resources:
   homepage: https://github.com/LibreCat/Catmandu
   license: http://dev.perl.org/licenses/
   repository: https://github.com/LibreCat/Catmandu.git
-version: 0.8010
+version: 0.8011

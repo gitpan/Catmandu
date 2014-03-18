@@ -14,6 +14,7 @@ WriteMakefile
                    'Data::Util' => '0.59',
                    'IO::Handle::Util' => '0.01',
                    'JSON' => '2.51',
+                   'Log::Any::Adapter' => 0,
                    'Moo' => '1.000008',
                    'MooX::Log::Any' => 0,
                    'Sub::Exporter' => '0.982',

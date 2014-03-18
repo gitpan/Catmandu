@@ -18,6 +18,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
+            "Log::Any::Adapter" : "0",
             "Test::Exception" : "0",
             "Test::More" : "0"
          }
@@ -58,7 +59,7 @@
    "provides" : {
       "Catmandu" : {
          "file" : "lib/Catmandu.pm",
-         "version" : "0.8010"
+         "version" : "0.8011"
       },
       "Catmandu::Addable" : {
          "file" : "lib/Catmandu/Addable.pm"
@@ -171,6 +172,9 @@
       "Catmandu::Fix::append" : {
          "file" : "lib/Catmandu/Fix/append.pm"
       },
+      "Catmandu::Fix::array" : {
+         "file" : "lib/Catmandu/Fix/array.pm"
+      },
       "Catmandu::Fix::capitalize" : {
          "file" : "lib/Catmandu/Fix/capitalize.pm"
       },
@@ -197,6 +201,9 @@
       },
       "Catmandu::Fix::from_json" : {
          "file" : "lib/Catmandu/Fix/from_json.pm"
+      },
+      "Catmandu::Fix::hash" : {
+         "file" : "lib/Catmandu/Fix/hash.pm"
       },
       "Catmandu::Fix::join_field" : {
          "file" : "lib/Catmandu/Fix/join_field.pm"
@@ -329,5 +336,5 @@
          "url" : "https://github.com/LibreCat/Catmandu.git"
       }
    },
-   "version" : "0.8010"
+   "version" : "0.8011"
 }
