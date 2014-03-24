@@ -20,7 +20,7 @@ name: Catmandu
 provides:
   Catmandu:
     file: lib/Catmandu.pm
-    version: 0.8011
+    version: 0.8012
   Catmandu::Addable:
     file: lib/Catmandu/Addable.pm
   Catmandu::ArrayIterator:
@@ -207,6 +207,7 @@ requires:
   Data::Util: 0.59
   IO::Handle::Util: 0.01
   JSON: 2.51
+  List::MoreUtils: 0.33
   Moo: 1.000008
   MooX::Log::Any: 0
   Sub::Exporter: 0.982
@@ -223,4 +224,4 @@ resources:
   homepage: https://github.com/LibreCat/Catmandu
   license: http://dev.perl.org/licenses/
   repository: https://github.com/LibreCat/Catmandu.git
-version: 0.8011
+version: 0.8012
