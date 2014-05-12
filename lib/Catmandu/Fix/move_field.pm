@@ -2,17 +2,12 @@ package Catmandu::Fix::move_field;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has old_path => (is => 'ro', required => 1);
-has new_path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $old_path, $new_path) = @_;
-    $orig->($class, old_path => $old_path,
-                    new_path => $new_path);
-};
+has old_path => (fix_arg => 1);
+has new_path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -52,7 +47,7 @@ Catmandu::Fix::move_field - move a field to another place in the data structure
 =head1 SYNOPSIS
 
    # Move 'foo.bar' to 'bar.foo'
-   move_field('foo.bar','bar.foo');
+   move_field(foo.bar, bar.foo)
 
 =head1 SEE ALSO
 

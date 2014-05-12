@@ -3,15 +3,11 @@ package Catmandu::Fix::sum;
 use Catmandu::Sane;
 use List::Util ();
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path) = @_;
-    $orig->($class, path => $path);
-};
+has path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -36,7 +32,7 @@ Catmandu::Fix::sum - replace the value of an array field with the sum of it's el
 =head1 SYNOPSIS
 
    # e.g. numbers => [2, 3]
-   sum('numbers');
+   sum(numbers)
    # numbers => 5
 
 =head1 SEE ALSO

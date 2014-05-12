@@ -2,15 +2,11 @@ package Catmandu::Fix::array;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path) = @_;
-    $orig->($class, path => $path);
-};
+has path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -37,7 +33,7 @@ Catmandu::Fix::array - creates an array out of a hash
 =head1 SYNOPSIS
 
    # tags => {name => 'Peter', age => 12}
-   array('tags');
+   array(tags)
    # tags => ['name', 'Peter', 'age', 12]
 
 =head1 SEE ALSO

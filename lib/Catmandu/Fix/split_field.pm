@@ -2,16 +2,12 @@ package Catmandu::Fix::split_field;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path       => (is => 'ro', required => 1);
-has split_char => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path, $split_char) = @_;
-    $orig->($class, path => $path, split_char => $split_char // qr'\s+');
-};
+has path       => (fix_arg => 1);
+has split_char => (fix_arg => 1, default => sub { qr'\s+' });
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -35,7 +31,7 @@ Catmandu::Fix::split_field - split a string value in a field into an ARRAY
 =head1 SYNOPSIS
 
    # Split the 'foo' value into an array. E.g. foo => '1:2:3'
-   split_field('foo',':'); # foo => [1,2,3]
+   split_field(foo, ':') # foo => [1,2,3]
 
 =head1 SEE ALSO
 

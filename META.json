@@ -1,12 +1,10 @@
 {
    "abstract" : "a data toolkit",
    "author" : [
-      "Nicolas Steenlant <nicolas.steenlant@ugent.be>",
-      "Patrick Hochstenbach <patrick.hochstenbach@ugent.be>",
-      "Vitali Peil <vitali.peil@uni-bielefeld.de>"
+      "Nicolas Steenlant, C<< <nicolas.steenlant at ugent.be> >>"
    ],
-   "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4203",
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Milla version v1.0.4, Dist::Zilla version 5.013, CPAN::Meta::Converter version 2.133380",
    "license" : [
       "perl_5"
    ],
@@ -15,17 +13,37 @@
       "version" : "2"
    },
    "name" : "Catmandu",
-   "prereqs" : {
-      "build" : {
-         "requires" : {
-            "Log::Any::Adapter" : "0",
-            "Test::Exception" : "0",
-            "Test::More" : "0"
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples"
+      ]
+   },
+   "optional_features" : {
+      "tidy" : {
+         "description" : "Support pretty printing compiled fix code",
+         "prereqs" : {
+            "runtime" : {
+               "requires" : {
+                  "Perl::Tidy" : "0"
+               }
+            }
          }
-      },
+      }
+   },
+   "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.42"
+            "Module::Build::Tiny" : "0.035"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::Pod" : "1.41"
          }
       },
       "runtime" : {
@@ -34,15 +52,17 @@
             "YAML::XS" : "0.34"
          },
          "requires" : {
-            "App::Cmd" : "0.310",
+            "App::Cmd" : "0.323",
             "CGI::Expand" : "2.02",
             "Clone" : "0.31",
+            "Config::Onion" : "1.004",
             "Data::Compare" : "1.22",
             "Data::UUID" : "1.217",
             "Data::Util" : "0.59",
             "IO::Handle::Util" : "0.01",
             "JSON" : "2.51",
             "List::MoreUtils" : "0.33",
+            "Marpa::R2" : "2.084000",
             "Moo" : "1.000008",
             "MooX::Log::Any" : "0",
             "Sub::Exporter" : "0.982",
@@ -55,273 +75,14 @@
             "namespace::clean" : "0.24",
             "perl" : "v5.10.1"
          }
-      }
-   },
-   "provides" : {
-      "Catmandu" : {
-         "file" : "lib/Catmandu.pm",
-         "version" : "0.8014"
       },
-      "Catmandu::Addable" : {
-         "file" : "lib/Catmandu/Addable.pm"
-      },
-      "Catmandu::ArrayIterator" : {
-         "file" : "lib/Catmandu/ArrayIterator.pm"
-      },
-      "Catmandu::BadArg" : {
-         "file" : "lib/Catmandu/Error.pm"
-      },
-      "Catmandu::BadVal" : {
-         "file" : "lib/Catmandu/Error.pm"
-      },
-      "Catmandu::Bag" : {
-         "file" : "lib/Catmandu/Bag.pm"
-      },
-      "Catmandu::Buffer" : {
-         "file" : "lib/Catmandu/Buffer.pm"
-      },
-      "Catmandu::CLI" : {
-         "file" : "lib/Catmandu/CLI.pm"
-      },
-      "Catmandu::Cmd" : {
-         "file" : "lib/Catmandu/Cmd.pm"
-      },
-      "Catmandu::Cmd::config" : {
-         "file" : "lib/Catmandu/Cmd/config.pm"
-      },
-      "Catmandu::Cmd::convert" : {
-         "file" : "lib/Catmandu/Cmd/convert.pm"
-      },
-      "Catmandu::Cmd::count" : {
-         "file" : "lib/Catmandu/Cmd/count.pm"
-      },
-      "Catmandu::Cmd::data" : {
-         "file" : "lib/Catmandu/Cmd/data.pm"
-      },
-      "Catmandu::Cmd::delete" : {
-         "file" : "lib/Catmandu/Cmd/delete.pm"
-      },
-      "Catmandu::Cmd::export" : {
-         "file" : "lib/Catmandu/Cmd/export.pm"
-      },
-      "Catmandu::Cmd::import" : {
-         "file" : "lib/Catmandu/Cmd/import.pm"
-      },
-      "Catmandu::Cmd::move" : {
-         "file" : "lib/Catmandu/Cmd/move.pm"
-      },
-      "Catmandu::Counter" : {
-         "file" : "lib/Catmandu/Counter.pm"
-      },
-      "Catmandu::Env" : {
-         "file" : "lib/Catmandu/Env.pm"
-      },
-      "Catmandu::Error" : {
-         "file" : "lib/Catmandu/Error.pm"
-      },
-      "Catmandu::Exporter" : {
-         "file" : "lib/Catmandu/Exporter.pm"
-      },
-      "Catmandu::Exporter::CSV" : {
-         "file" : "lib/Catmandu/Exporter/CSV.pm"
-      },
-      "Catmandu::Exporter::JSON" : {
-         "file" : "lib/Catmandu/Exporter/JSON.pm"
-      },
-      "Catmandu::Exporter::RIS" : {
-         "file" : "lib/Catmandu/Exporter/RIS.pm"
-      },
-      "Catmandu::Exporter::YAML" : {
-         "file" : "lib/Catmandu/Exporter/YAML.pm"
-      },
-      "Catmandu::Fix" : {
-         "file" : "lib/Catmandu/Fix.pm"
-      },
-      "Catmandu::Fix::Base" : {
-         "file" : "lib/Catmandu/Fix/Base.pm"
-      },
-      "Catmandu::Fix::Condition" : {
-         "file" : "lib/Catmandu/Fix/Condition.pm"
-      },
-      "Catmandu::Fix::Condition::SimpleAllTest" : {
-         "file" : "lib/Catmandu/Fix/Condition/SimpleAllTest.pm"
-      },
-      "Catmandu::Fix::Condition::SimpleAnyTest" : {
-         "file" : "lib/Catmandu/Fix/Condition/SimpleAnyTest.pm"
-      },
-      "Catmandu::Fix::Condition::all_match" : {
-         "file" : "lib/Catmandu/Fix/Condition/all_match.pm"
-      },
-      "Catmandu::Fix::Condition::any_match" : {
-         "file" : "lib/Catmandu/Fix/Condition/any_match.pm"
-      },
-      "Catmandu::Fix::Condition::exists" : {
-         "file" : "lib/Catmandu/Fix/Condition/exists.pm"
-      },
-      "Catmandu::Fix::Loader" : {
-         "file" : "lib/Catmandu/Fix/Loader.pm"
-      },
-      "Catmandu::Fix::Loader::Env" : {
-         "file" : "lib/Catmandu/Fix/Loader.pm"
-      },
-      "Catmandu::Fix::add_field" : {
-         "file" : "lib/Catmandu/Fix/add_field.pm"
-      },
-      "Catmandu::Fix::add_to_store" : {
-         "file" : "lib/Catmandu/Fix/add_to_store.pm"
-      },
-      "Catmandu::Fix::append" : {
-         "file" : "lib/Catmandu/Fix/append.pm"
-      },
-      "Catmandu::Fix::array" : {
-         "file" : "lib/Catmandu/Fix/array.pm"
-      },
-      "Catmandu::Fix::capitalize" : {
-         "file" : "lib/Catmandu/Fix/capitalize.pm"
-      },
-      "Catmandu::Fix::clone" : {
-         "file" : "lib/Catmandu/Fix/clone.pm"
-      },
-      "Catmandu::Fix::collapse" : {
-         "file" : "lib/Catmandu/Fix/collapse.pm"
-      },
-      "Catmandu::Fix::copy_field" : {
-         "file" : "lib/Catmandu/Fix/copy_field.pm"
-      },
-      "Catmandu::Fix::count" : {
-         "file" : "lib/Catmandu/Fix/count.pm"
-      },
-      "Catmandu::Fix::downcase" : {
-         "file" : "lib/Catmandu/Fix/downcase.pm"
-      },
-      "Catmandu::Fix::expand" : {
-         "file" : "lib/Catmandu/Fix/expand.pm"
-      },
-      "Catmandu::Fix::expand_date" : {
-         "file" : "lib/Catmandu/Fix/expand_date.pm"
-      },
-      "Catmandu::Fix::from_json" : {
-         "file" : "lib/Catmandu/Fix/from_json.pm"
-      },
-      "Catmandu::Fix::hash" : {
-         "file" : "lib/Catmandu/Fix/hash.pm"
-      },
-      "Catmandu::Fix::join_field" : {
-         "file" : "lib/Catmandu/Fix/join_field.pm"
-      },
-      "Catmandu::Fix::lookup" : {
-         "file" : "lib/Catmandu/Fix/lookup.pm"
-      },
-      "Catmandu::Fix::lookup_in_store" : {
-         "file" : "lib/Catmandu/Fix/lookup_in_store.pm"
-      },
-      "Catmandu::Fix::move_field" : {
-         "file" : "lib/Catmandu/Fix/move_field.pm"
-      },
-      "Catmandu::Fix::nothing" : {
-         "file" : "lib/Catmandu/Fix/nothing.pm"
-      },
-      "Catmandu::Fix::prepend" : {
-         "file" : "lib/Catmandu/Fix/prepend.pm"
-      },
-      "Catmandu::Fix::remove_field" : {
-         "file" : "lib/Catmandu/Fix/remove_field.pm"
-      },
-      "Catmandu::Fix::replace_all" : {
-         "file" : "lib/Catmandu/Fix/replace_all.pm"
-      },
-      "Catmandu::Fix::retain_field" : {
-         "file" : "lib/Catmandu/Fix/retain_field.pm"
-      },
-      "Catmandu::Fix::set_field" : {
-         "file" : "lib/Catmandu/Fix/set_field.pm"
-      },
-      "Catmandu::Fix::sort_field" : {
-         "file" : "lib/Catmandu/Fix/sort_field.pm"
-      },
-      "Catmandu::Fix::split_field" : {
-         "file" : "lib/Catmandu/Fix/split_field.pm"
-      },
-      "Catmandu::Fix::substring" : {
-         "file" : "lib/Catmandu/Fix/substring.pm"
-      },
-      "Catmandu::Fix::sum" : {
-         "file" : "lib/Catmandu/Fix/sum.pm"
-      },
-      "Catmandu::Fix::to_json" : {
-         "file" : "lib/Catmandu/Fix/to_json.pm"
-      },
-      "Catmandu::Fix::trim" : {
-         "file" : "lib/Catmandu/Fix/trim.pm"
-      },
-      "Catmandu::Fix::upcase" : {
-         "file" : "lib/Catmandu/Fix/upcase.pm"
-      },
-      "Catmandu::Fixable" : {
-         "file" : "lib/Catmandu/Fixable.pm"
-      },
-      "Catmandu::Hits" : {
-         "file" : "lib/Catmandu/Hits.pm"
-      },
-      "Catmandu::Importer" : {
-         "file" : "lib/Catmandu/Importer.pm"
-      },
-      "Catmandu::Importer::CSV" : {
-         "file" : "lib/Catmandu/Importer/CSV.pm"
-      },
-      "Catmandu::Importer::JSON" : {
-         "file" : "lib/Catmandu/Importer/JSON.pm"
-      },
-      "Catmandu::Importer::Mock" : {
-         "file" : "lib/Catmandu/Importer/Mock.pm"
-      },
-      "Catmandu::Importer::YAML" : {
-         "file" : "lib/Catmandu/Importer/YAML.pm"
-      },
-      "Catmandu::Iterable" : {
-         "file" : "lib/Catmandu/Iterable.pm"
-      },
-      "Catmandu::Iterator" : {
-         "file" : "lib/Catmandu/Iterator.pm"
-      },
-      "Catmandu::NotImplemented" : {
-         "file" : "lib/Catmandu/Error.pm"
-      },
-      "Catmandu::Paged" : {
-         "file" : "lib/Catmandu/Paged.pm"
-      },
-      "Catmandu::Pluggable" : {
-         "file" : "lib/Catmandu/Pluggable.pm"
-      },
-      "Catmandu::Plugin::Datestamps" : {
-         "file" : "lib/Catmandu/Plugin/Datestamps.pm"
-      },
-      "Catmandu::Plugin::Versioning" : {
-         "file" : "lib/Catmandu/Plugin/Versioning.pm"
-      },
-      "Catmandu::Sane" : {
-         "file" : "lib/Catmandu/Sane.pm"
-      },
-      "Catmandu::Searchable" : {
-         "file" : "lib/Catmandu/Searchable.pm"
-      },
-      "Catmandu::Serializer" : {
-         "file" : "lib/Catmandu/Serializer.pm"
-      },
-      "Catmandu::Serializer::json" : {
-         "file" : "lib/Catmandu/Serializer/json.pm"
-      },
-      "Catmandu::Store" : {
-         "file" : "lib/Catmandu/Store.pm"
-      },
-      "Catmandu::Store::Hash" : {
-         "file" : "lib/Catmandu/Store/Hash.pm"
-      },
-      "Catmandu::Store::Hash::Bag" : {
-         "file" : "lib/Catmandu/Store/Hash.pm"
-      },
-      "Catmandu::Util" : {
-         "file" : "lib/Catmandu/Util.pm"
+      "test" : {
+         "requires" : {
+            "Log::Any::Adapter" : "0",
+            "Test::Deep" : "0",
+            "Test::Exception" : "0",
+            "Test::More" : "0"
+         }
       }
    },
    "release_status" : "stable",
@@ -330,12 +91,36 @@
          "web" : "https://github.com/LibreCat/Catmandu/issues"
       },
       "homepage" : "https://github.com/LibreCat/Catmandu",
-      "license" : [
-         "http://dev.perl.org/licenses/"
-      ],
       "repository" : {
-         "url" : "https://github.com/LibreCat/Catmandu.git"
+         "type" : "git",
+         "url" : "https://github.com/LibreCat/Catmandu.git",
+         "web" : "https://github.com/LibreCat/Catmandu"
       }
    },
-   "version" : "0.8014"
+   "version" : "0.9",
+   "x_contributors" : [
+      "Christian Pietsch <chr.pietsch+github@googlemail.com>",
+      "Dave Sherohman <Dave.Sherohman@lub.lu.se>",
+      "Dave Sherohman <Dave.Sherohman@ub.lu.se>",
+      "EC2 Default User <ec2-user@ip-10-113-18-155.ec2.internal>",
+      "EC2 Default User <ec2-user@ip-10-114-199-125.ec2.internal>",
+      "EC2 Default User <ec2-user@ip-10-194-230-16.ec2.internal>",
+      "EC2 Default User <ec2-user@ip-10-77-5-148.ec2.internal>",
+      "Jakob Voss <jakob@nichtich.de>",
+      "Jakob Voss <voss@gbv.de>",
+      "Nicolas <nicolas.steenlant@ugent.be>",
+      "Nicolas Franck <nicolas.franck@ugent.be>",
+      "Nicolas Steenlant <nicolas.steenlant@gmail.com>",
+      "Nicolas Steenlant <nsteenla@ca20c608.ugent.be>",
+      "Nicolas Steenlnat <nicolas.steenlant@ugent.be>",
+      "Patrick <phochste@hal.lub.lu.se>",
+      "Patrick Hochstenbach <Patrick.Hochstenbach@UGent.be>",
+      "Patrick Hochstenbach <patrick.hochstenbach@ugent.be>",
+      "Snorri Briem <Snorri.Briem@lub.lu.se>",
+      "Snorri Briem <Snorri.Briem@ub.lu.se>",
+      "Vitali Peil <vitali.peil@uni-bielefeld.de>",
+      "phochste <phochste@vmtemp4.ugent.be>",
+      "vpeil <vitali.peil@uni-bielefeld.de>"
+   ]
 }
+

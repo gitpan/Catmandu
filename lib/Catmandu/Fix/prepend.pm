@@ -2,16 +2,12 @@ package Catmandu::Fix::prepend;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path  => (is => 'ro', required => 1);
-has value => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path, $value) = @_;
-    $orig->($class, path => $path, value => $value);
-};
+has path  => (fix_arg => 1);
+has value => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -35,7 +31,7 @@ Catmandu::Fix::prepend - add a prefix to the value of a field
 =head1 SYNOPSIS
 
    # prepend to a value. e.g. {name => 'smith'}
-   prepend('name', 'mr. '); # {name => 'mr. smith'}
+   prepend(name, 'mr. ') # {name => 'mr. smith'}
 
 =head1 SEE ALSO
 

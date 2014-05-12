@@ -2,16 +2,12 @@ package Catmandu::Fix::trim;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path => (is => 'ro', required => 1);
-has mode => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path, $mode) = @_;
-    $orig->($class, path => $path, mode => $mode || 'whitespace');
-};
+has path => (fix_arg => 1);
+has mode => (fix_arg => 1, default => sub { 'whitespace' });
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -44,11 +40,11 @@ Catmandu::Fix::trim - trim leading and ending junk from the value of a field
 
    # the default mode trims whitespace
    # e.g. foo => '   abc   ';
-   trim('foo'); # foo => 'abc';
-   trim('foo', 'whitespace'); # foo => 'abc';
+   trim(foo) # foo => 'abc';
+   trim(foo, whitespace) # foo => 'abc';
    # trim non-word characters
    # e.g. foo => '   abc  / : .';
-   trim('foo', 'nonword'); # foo => 'abc';
+   trim(foo, nonword) # foo => 'abc';
 
 =head1 SEE ALSO
 

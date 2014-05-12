@@ -1,7 +1,8 @@
 package Catmandu::Fix;
 
 use Catmandu::Sane;
-use Catmandu::Util qw(:is :string);
+use Catmandu;
+use Catmandu::Util qw(:is :string :misc);
 use Clone qw(clone);
 
 sub _eval_emit {
@@ -10,25 +11,39 @@ sub _eval_emit {
 }
 
 use Moo;
-use Catmandu::Fix::Loader;
+use Catmandu::Fix::Parser;
 use Data::Dumper ();
 use B ();
 
 with 'MooX::Log::Any';
 
 has tidy        => (is => 'ro');
-has fixer       => (is => 'ro', lazy => 1, init_arg => undef, builder => 1);
+has parser      => (is => 'lazy');
+has fixer       => (is => 'lazy', init_arg => undef);
 has _num_labels => (is => 'rw', lazy => 1, init_arg => undef, default => sub { 0; });
 has _num_vars   => (is => 'rw', lazy => 1, init_arg => undef, default => sub { 0; });
 has _captures   => (is => 'ro', lazy => 1, init_arg => undef, default => sub { +{}; });
 has var         => (is => 'ro', lazy => 1, init_arg => undef, builder => 'generate_var');
 has fixes       => (is => 'ro', required => 1, trigger => 1);
+has _reject     => (is => 'ro', init_arg => undef, default => sub { +{} });
+has _reject_var => (is => 'ro', lazy => 1, init_arg => undef, builder => '_build_reject_var');
+
+sub _build_parser {
+    Catmandu::Fix::Parser->new;
+}
 
 sub _trigger_fixes {
     my ($self) = @_;
     my $fixes = $self->fixes;
-    my $loaded_fixes = Catmandu::Fix::Loader::load_fixes($fixes);
-    splice(@$fixes, 0, @$fixes, @$loaded_fixes);
+    my $parsed_fixes = [];
+    for my $fix (@$fixes) {
+        if (ref $fix) {
+            push @$parsed_fixes, $fix;
+        } else {
+            push @$parsed_fixes, @{$self->parser->parse($fix)};
+        }
+    }
+    splice(@$fixes, 0, @$fixes, @$parsed_fixes);
 }
 
 sub _build_fixer {
@@ -37,22 +52,39 @@ sub _build_fixer {
     _eval_emit($self->emit, $self->_captures) or Catmandu::Error->throw($@);
 }
 
+sub _build_reject_var {
+    my ($self) = @_;
+    $self->capture($self->_reject);
+}
+
 sub fix {
     my ($self, $data) = @_;
 
     my $fixer = $self->fixer;
 
     if (is_hash_ref($data)) {
-        return $fixer->($data);
+        my $d = $fixer->($data);
+        return if $d == $self->_reject;
+        return $d;
     }
+
     if (is_instance($data)) {
-        return $data->map(sub { $fixer->($_[0]) });
+        return $data->map(sub { $fixer->($_[0]) })
+                    ->reject(sub { $_[0] == $self->_reject });
     }
+
     if (is_code_ref($data)) {
-        return sub { $fixer->($data->() // return) };
+        return sub {
+            for (;;) {
+                my $d = $fixer->($data->() // return);
+                next if $d == $self->_reject;
+                return $d;
+            }
+        };
     }
+
     if (is_array_ref($data)) {
-        return [ map { $fixer->($_) } @$data ];
+        return [ grep { $_ != $self->_reject } map { $fixer->($_) } @$data ];
     }
 
     Catmandu::BadArg->throw("must be hashref, arrayref, coderef or iterable object");
@@ -85,13 +117,12 @@ sub emit {
     for my $fix (@{$self->fixes}) {
         $perl .= $self->emit_fix($fix);
     }
-    $perl .= "1;";
+    $perl .= "${var};";
     $perl .= "} or do {";
     $perl .= $self->emit_declare_vars($err, '$@');
     # TODO throw Catmandu::Error
     $perl .= qq|die ${err}.Data::Dumper->Dump([${var}], [qw(data)]);|;
     $perl .= "};";
-    $perl .= "return $var;";
     $perl .= "};";
 
     if (%$captures) {
@@ -119,17 +150,26 @@ sub emit {
             Catmandu::Error->throw($err);
         }
 
-        return $tidy_perl;
+        $perl = $tidy_perl;
     }
+
+    $self->log->debug($perl);
 
     $perl;
 }
 
+sub emit_reject {
+    my ($self) = @_;
+    my $reject_var = $self->_reject_var;
+    "return $reject_var;";
+}
+
 sub emit_fix {
     my ($self, $fix) = @_;
+    my $perl;
 
     if ($fix->can('emit')) {
-        $self->emit_block(sub {
+        $perl = $self->emit_block(sub {
             my ($label) = @_;
             $fix->emit($self, $label);
         });
@@ -137,8 +177,10 @@ sub emit_fix {
         my $var = $self->var;
         my $ref = $self->generate_var;
         $self->_captures->{$ref} = $fix;
-        "${var} = ${ref}->fix(${var});";
+        $perl = "${var} = ${ref}->fix(${var});";
     }
+
+    $perl;
 }
 
 sub emit_block {
@@ -558,7 +600,7 @@ Catmandu::Fix - a Catmandu class used for data crunching
 
 =head1 DESCRIPTION
 
-Catmandu::Fix-es can be use for easy data manipulation by non programmers. Using a
+Catmandu::Fixes can be used for easy data manipulation by non programmers. Using a
 small Perl DSL language end-users can use Fix routines to manipulate data objects.
 A plain text file of fixes can be created to specify all the routines needed to
 tranform the data into the desired format.
@@ -566,10 +608,10 @@ tranform the data into the desired format.
 =head1 PATHS
 
 All the Fix routines in Catmandu::Fix use a TT2 type reference to point to values
-in a Perl Hash. E.g. 'foo.2.bar' is a key 'bar' which is the 3-rd value of the 
+in a Perl Hash. E.g. 'foo.2.bar' is a key 'bar' which is the 3-rd value of the
 key 'foo'.
 
-A special case is when you want to point to all items in an array. In this case 
+A special case is when you want to point to all items in an array. In this case
 the wildcard '*' can be used. E.g. 'foo.*' points to all the items in the 'foo'
 array.
 
@@ -621,7 +663,24 @@ Executes all the fixes on a generator function. Returns a new generator with fix
 
 =head2 log
 
-Return the current logger.
+Return the current logger. Can be used when creating your own Fix commands.
+
+E.g.
+
+    package Catmandu::Fix::meow;
+
+    use Moo;
+
+    sub fix {
+        my ($self,$data) = @_;
+
+        $self->log->debug("Setting meow");
+        $data->{meow} = 'purrrrr';
+
+        $data;
+    }
+
+See also: L<Catmandu> for activating the logger in your main code.
 
 =cut
 

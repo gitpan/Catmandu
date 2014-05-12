@@ -2,15 +2,11 @@ package Catmandu::Fix::downcase;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path) = @_;
-    $orig->($class, path => $path);
-};
+has path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -33,7 +29,7 @@ Catmandu::Fix::downcase - lowercase the value of a field
 =head1 SYNOPSIS
 
    # Lowercase 'foo'. E.g. foo => 'BAR'
-   downcase('foo'); # foo => 'bar'
+   downcase(foo) # foo => 'bar'
 
 =head1 SEE ALSO
 

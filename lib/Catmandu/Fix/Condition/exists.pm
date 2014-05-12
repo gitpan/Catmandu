@@ -2,15 +2,11 @@ package Catmandu::Fix::Condition::exists;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Condition';
 
-has path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path) = @_;
-    $orig->($class, path => $path);
-};
+has path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer, $label) = @_;
@@ -27,7 +23,7 @@ sub emit {
             $perl .= "is_hash_ref(${var}) && exists(${var}->{${str_key}})";
         }
         $perl .= ") {";
-        for my $fix (@{$self->fixes}) {
+        for my $fix (@{$self->pass_fixes}) {
             $perl .= $fixer->emit_fix($fix);
         }
         $perl .= "last $label;";
@@ -35,7 +31,7 @@ sub emit {
         $perl;
     });
 
-    for my $fix (@{$self->otherwise_fixes}) {
+    for my $fix (@{$self->fail_fixes}) {
         $perl .= $fixer->emit_fix($fix);
     }
     $perl;
@@ -48,13 +44,13 @@ Catmandu::Fix::Condition::exists - only execute fixes if the path exists
 =head1 SYNOPSIS
 
    # uppercase the value of field 'foo' if the field 'oogly' exists
-   if_exists('oogly');
-   upcase('foo'); # foo => 'BAR'
-   end()
+   if exists(oogly)
+     upcase(foo) # foo => 'BAR'
+   end
    # inverted
-   unless_exists('oogly');
-   upcase('foo'); # foo => 'bar'
-   end()
+   unless exists(oogly)
+     upcase(foo) # foo => 'bar'
+   end
 
 =head1 SEE ALSO
 

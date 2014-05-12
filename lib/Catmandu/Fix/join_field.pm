@@ -2,16 +2,12 @@ package Catmandu::Fix::join_field;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path      => (is => 'ro', required => 1);
-has join_char => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path, $join_char) = @_;
-    $orig->($class, path => $path, join_char => $join_char // '');
-};
+has path      => (fix_arg => 1);
+has join_char => (fix_arg => 1, default => sub { '' });
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -37,7 +33,7 @@ Catmandu::Fix::join_field - join the ARRAY values of a field into a string
 =head1 SYNOPSIS
 
    # Join the array values of a field into a string. E.g. foo => [1,2,3]
-   join_field('foo','/'); # foo => "1/2/3"
+   join_field(foo, /) # foo => "1/2/3"
 
 =head1 SEE ALSO
 

@@ -2,15 +2,12 @@ package Catmandu::Fix::Condition::any_match;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
+
+has path    => (fix_arg => 1);
+has pattern => (fix_arg => 1);
 
 with 'Catmandu::Fix::Condition::SimpleAnyTest';
-
-has pattern => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path, $pattern) = @_;
-    $orig->($class, path => $path, pattern => $pattern);
-};
 
 sub emit_test {
     my ($self, $var) = @_;
@@ -25,9 +22,9 @@ Catmandu::Fix::Condition::any_match - only execute fixes if any path value match
 =head1 SYNOPSIS
 
    # uppercase the value of field 'foo' if field 'oogly' has the value 'doogly'
-   if_any_match('oogly', 'doogly');
-   upcase('foo'); # foo => 'BAR'
-   end()
+   if any_match(oogly, "doogly")
+     upcase(foo) # foo => 'BAR'
+   end
 
 =head1 SEE ALSO
 

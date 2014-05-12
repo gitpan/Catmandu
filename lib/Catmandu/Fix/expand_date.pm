@@ -2,6 +2,7 @@ package Catmandu::Fix::expand_date;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 my $DATE_REGEX = qr{
     ^([0-9]{4})
@@ -10,12 +11,7 @@ my $DATE_REGEX = qr{
         )?
 }x;
 
-has date_field => (is => 'ro', default => sub { 'date' });
-
-around BUILDARGS => sub {
-    my ($orig, $class, $date_field) = @_;
-    $orig->($class, defined $date_field ? (date_field => $date_field) : ());
-};
+has date_field => (fix_arg => 1, default => sub { 'date' });
 
 sub fix {
     my ($self, $data) = @_;
@@ -38,11 +34,11 @@ Catmandu::Fix::expand_date - expand a date field into year, month and date
 =head1 SYNOPSIS
 
     # {date => "2001-09-11"}
-    expand_date();
+    expand_date()
     # => {year => 2001, month => "9", day => "11", date => "2001-09-11"}
 
     # {datestamp => "2001:09"}
-    expand_date('datestamp');
+    expand_date(datestamp)
     # => {year => 2001, month => "9", datestamp => "2001:09"}
 
 =head1 DESCRIPTION

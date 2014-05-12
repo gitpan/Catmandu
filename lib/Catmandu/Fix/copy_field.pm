@@ -2,17 +2,12 @@ package Catmandu::Fix::copy_field;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has old_path => (is => 'ro', required => 1);
-has new_path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $old_path, $new_path) = @_;
-    $orig->($class, old_path => $old_path,
-                    new_path => $new_path);
-};
+has old_path => (fix_arg => 1);
+has new_path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -58,7 +53,7 @@ Catmandu::Fix::copy_field - copy the value of one field to a new field
 =head1 SYNOPSIS
 
    # Copy the values of foo.bar into bar.foo
-   copy_field('foo.bar','bar.foo');
+   copy_field(foo.bar, bar.foo)
 
 =head1 SEE ALSO
 

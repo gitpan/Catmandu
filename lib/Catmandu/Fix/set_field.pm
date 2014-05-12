@@ -3,16 +3,12 @@ package Catmandu::Fix::set_field;
 use Catmandu::Sane;
 use Clone qw(clone);
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path  => (is => 'ro', required => 1);
-has value => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path, $value) = @_;
-    $orig->($class, path => $path, value => $value);
-};
+has path  => (fix_arg => 1);
+has value => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -38,10 +34,10 @@ if they are missing.
 =head1 SYNOPSIS
 
    # Change the value of 'foo' to 'bar 123'
-   set_field('foo','bar 123');
+   set_field(foo, 'bar 123')
 
    # Change a deeply nested key
-   set_field('my.deep.nested.key','hi');
+   set_field(my.deep.nested.key, hi)
 
 =head1 SEE ALSO
 

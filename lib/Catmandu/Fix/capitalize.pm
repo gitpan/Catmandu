@@ -2,15 +2,11 @@ package Catmandu::Fix::capitalize;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path) = @_;
-    $orig->($class, path => $path);
-};
+has path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -33,7 +29,7 @@ Catmandu::Fix::capitalize - capitalize the value of a key
 =head1 SYNOPSIS
 
    # Capitalize the value of foo. E.g. foo => 'bar'
-   capitalize('foo');  # foo => 'Bar'
+   capitalize(foo)  # foo => 'Bar'
 
 =head1 SEE ALSO
 

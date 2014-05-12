@@ -2,15 +2,11 @@ package Catmandu::Fix::remove_field;
 
 use Catmandu::Sane;
 use Moo;
+use Catmandu::Fix::Has;
 
 with 'Catmandu::Fix::Base';
 
-has path => (is => 'ro', required => 1);
-
-around BUILDARGS => sub {
-    my ($orig, $class, $path) = @_;
-    $orig->($class, path => $path);
-};
+has path => (fix_arg => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -30,7 +26,7 @@ Catmandu::Fix::remove_field - remove a field form the data
 =head1 SYNOPSIS
 
    # Remove the foo.bar field
-   remove_field('foo.bar');
+   remove_field(foo.bar)
 
 =head1 SEE ALSO
 
