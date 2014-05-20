@@ -1,10 +1,12 @@
 requires 'perl', 'v5.10.1';
 
 on 'test', sub {
-  requires 'Test::Deep', 0;
-  requires 'Test::Exception', 0;
-  requires 'Test::More', 0;
-  requires 'Log::Any::Adapter', 0;
+  requires 'Test::Deep', '0.112';
+  requires 'Test::Exception', '0.32';
+  requires 'Test::More', '1.001003';
+  requires 'Test::Pod', 0;
+  requires 'Log::Any::Test', '0.15';
+  requires 'Log::Any::Adapter', '0.11';
 };
 
 requires 'App::Cmd', '0.323';
@@ -17,6 +19,7 @@ requires 'Data::Util', '0.59';
 requires 'IO::Handle::Util', '0.01';
 requires 'JSON', '2.51';
 requires 'List::MoreUtils', '0.33';
+requires 'Log::Any::Adapter', '0.11';
 requires 'Marpa::R2', '2.084000';
 requires 'Moo', '1.000008';
 requires 'MooX::Log::Any', 0;
