@@ -55,6 +55,7 @@ requires:
   Text::CSV: '1.21'
   Throwable: '0.200004'
   Time::HiRes: '0'
+  Time::Piece: '0'
   Try::Tiny::ByClass: '0.01'
   YAML::Any: '0.90'
   namespace::clean: '0.24'
@@ -63,7 +64,7 @@ resources:
   bugtracker: https://github.com/LibreCat/Catmandu/issues
   homepage: https://github.com/LibreCat/Catmandu
   repository: https://github.com/LibreCat/Catmandu.git
-version: '0.9101'
+version: '0.9102'
 x_contributors:
   - 'Christian Pietsch <chr.pietsch+github@googlemail.com>'
   - 'Dave Sherohman <Dave.Sherohman@lub.lu.se>'
