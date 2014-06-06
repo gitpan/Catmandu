@@ -6,7 +6,6 @@ MANIFEST
 META.json
 META.yml
 README
-TODO
 bin/catmandu
 cpanfile
 dist.ini
@@ -23,8 +22,13 @@ lib/Catmandu/Cmd/count.pm
 lib/Catmandu/Cmd/data.pm
 lib/Catmandu/Cmd/delete.pm
 lib/Catmandu/Cmd/export.pm
+lib/Catmandu/Cmd/exporter_info.pm
+lib/Catmandu/Cmd/fix_info.pm
 lib/Catmandu/Cmd/import.pm
+lib/Catmandu/Cmd/importer_info.pm
+lib/Catmandu/Cmd/module_info.pm
 lib/Catmandu/Cmd/move.pm
+lib/Catmandu/Cmd/store_info.pm
 lib/Catmandu/Counter.pm
 lib/Catmandu/Env.pm
 lib/Catmandu/Error.pm
@@ -65,6 +69,7 @@ lib/Catmandu/Fix/expand_date.pm
 lib/Catmandu/Fix/from_json.pm
 lib/Catmandu/Fix/hash.pm
 lib/Catmandu/Fix/join_field.pm
+lib/Catmandu/Fix/log.pm
 lib/Catmandu/Fix/lookup.pm
 lib/Catmandu/Fix/lookup_in_store.pm
 lib/Catmandu/Fix/move_field.pm
@@ -86,11 +91,17 @@ lib/Catmandu/Fixable.pm
 lib/Catmandu/Hits.pm
 lib/Catmandu/Importer.pm
 lib/Catmandu/Importer/CSV.pm
+lib/Catmandu/Importer/ExporterInfo.pm
+lib/Catmandu/Importer/FixInfo.pm
+lib/Catmandu/Importer/ImporterInfo.pm
 lib/Catmandu/Importer/JSON.pm
 lib/Catmandu/Importer/Mock.pm
+lib/Catmandu/Importer/ModuleInfo.pm
+lib/Catmandu/Importer/StoreInfo.pm
 lib/Catmandu/Importer/YAML.pm
 lib/Catmandu/Iterable.pm
 lib/Catmandu/Iterator.pm
+lib/Catmandu/Logger.pm
 lib/Catmandu/Paged.pm
 lib/Catmandu/Pluggable.pm
 lib/Catmandu/Plugin/Datestamps.pm
@@ -152,6 +163,7 @@ t/Catmandu-Fix-expand_date.t
 t/Catmandu-Fix-from_json.t
 t/Catmandu-Fix-hash.t
 t/Catmandu-Fix-join_field.t
+t/Catmandu-Fix-log.t
 t/Catmandu-Fix-lookup.t
 t/Catmandu-Fix-lookup_in_store.t
 t/Catmandu-Fix-move_field.t
@@ -175,6 +187,7 @@ t/Catmandu-Hits.t
 t/Catmandu-Importer-CSV.t
 t/Catmandu-Importer-JSON.t
 t/Catmandu-Importer-Mock.t
+t/Catmandu-Importer-ModuleInfo.t
 t/Catmandu-Importer-YAML.t
 t/Catmandu-Importer.t
 t/Catmandu-Iterable.t
@@ -193,6 +206,7 @@ t/Catmandu-Validator-Simple.t
 t/Catmandu-Validator.t
 t/Catmandu.t
 t/catmandu.yml
+t/lib/Catmandu/Fix/undef_error.pm
 t/lib/Catmandu/Importer/Values.pm
 t/lib/Catmandu/Serializer/dumper.pm
 t/nothing.fix

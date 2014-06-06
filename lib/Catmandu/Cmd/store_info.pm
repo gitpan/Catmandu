@@ -1,34 +1,28 @@
-package Catmandu::Cmd::config;
+package Catmandu::Cmd::store_info;
 
-use namespace::clean;
 use Catmandu::Sane;
 use parent 'Catmandu::Cmd';
-use Catmandu::Util qw(data_at);
-use Catmandu;
+use Catmandu::Importer::StoreInfo;
 
-sub description {
-    <<EOS;
-examples:
-
-# export config to JSON
-catmandu config
-# or any other Catmandu::Exporter
-catmandu config to YAML --fix 'delete_field(password)'
-# export only part of the config file
-catmandu config my.prefix to CSV
-EOS
+sub command_opt_spec {
+    (
+        ["inc=s@", 'override included directories (defaults to @INC)', {default => [@INC]}],
+        ["verbose|v", ""]
+    );
 }
 
 sub command {
     my ($self, $opts, $args) = @_;
-    my $path;
+    my $verbose = $opts->verbose;
+    my $from_opts = {};
+    for my $key (qw(inc)) {
+        $from_opts->{$key} = $opts->$key if defined $opts->$key;
+    }
+    my $from = Catmandu::Importer::StoreInfo->new($from_opts);
+
     my $into_args = [];
     my $into_opts = {};
     my $into;
-
-    if (@$args == 1 || (@$args > 1 && $args->[1] eq 'to')) {
-        $path = shift @$args;
-    }
 
     if (@$args && $args->[0] eq 'to') {
         for (my $i = 1; $i < @$args; $i++) {
@@ -48,18 +42,25 @@ sub command {
 
     if (@$into_args || %$into_opts) {
         $into = Catmandu->exporter($into_args->[0], $into_opts);
+        $into->add_many($from);
+        $into->commit;
     } else {
-        $into = Catmandu->exporter('JSON', pretty => 1);
+        my $cols = [qw(name version)];
+        push @$cols, 'file' if $opts->verbose;
+        $from->format(cols => $cols);
     }
-
-    $into->add(defined $path ?
-            data_at($path, Catmandu->config) :
-        Catmandu->config);
-    $into->commit;
 }
 
 1;
 
 =head1 NAME
 
-Catmandu::Cmd::config - export the Catmandu config
+Catmandu::Cmd::store_info - list installed Catmandu stores
+
+=head1 SEE ALSO
+
+    L<Catmandu::Importer::StoreInfo>
+
+=cut
+
+

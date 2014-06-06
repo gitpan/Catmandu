@@ -17,13 +17,14 @@ my %module_build_args = (
   "dist_author" => [
     "Nicolas Steenlant, C<< <nicolas.steenlant at ugent.be> >>"
   ],
-  "dist_name" => "Catmandu",
-  "dist_version" => "0.9103",
+  "dist_name" => "catmandu",
+  "dist_version" => "0.92",
   "license" => "perl",
-  "module_name" => "Catmandu",
+  "module_name" => "catmandu",
   "recommends" => {
     "JSON::XS" => "2.3",
-    "YAML::XS" => "0.34"
+    "Log::Any::Adapter::Log4perl" => "0.06",
+    "Log::Log4perl" => "1.44"
   },
   "recursive_test_files" => 1,
   "requires" => {
@@ -34,13 +35,15 @@ my %module_build_args = (
     "Data::Compare" => "1.22",
     "Data::UUID" => "1.217",
     "Data::Util" => "0.59",
+    "File::Find::Rule" => "0.33",
     "IO::Handle::Util" => "0.01",
     "JSON" => "2.51",
     "List::MoreUtils" => "0.33",
+    "Log::Any" => "0.15",
     "Log::Any::Adapter" => "0.11",
     "Marpa::R2" => "2.084000",
-    "Moo" => "1.000008",
-    "MooX::Log::Any" => 0,
+    "Module::Info" => 0,
+    "Moo" => "1.004006",
     "Sub::Exporter" => "0.982",
     "Sub::Quote" => 0,
     "Text::CSV" => "1.21",
@@ -48,7 +51,7 @@ my %module_build_args = (
     "Time::HiRes" => 0,
     "Time::Piece" => 0,
     "Try::Tiny::ByClass" => "0.01",
-    "YAML::Any" => "0.90",
+    "YAML::XS" => "0.41",
     "namespace::clean" => "0.24",
     "perl" => "v5.10.1"
   },

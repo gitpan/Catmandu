@@ -10,7 +10,7 @@ use Data::Compare ();
 use IO::File;
 use IO::Handle::Util ();
 use File::Spec;
-use YAML::Any ();
+use YAML::XS ();
 use JSON ();
 
 our %EXPORT_TAGS = (
@@ -95,7 +95,7 @@ sub io {
         $io = IO::Handle::Util::io_from_scalar_ref($arg);
         binmode $io, $binmode;
     } elsif (is_glob_ref(\$arg) || is_glob_ref($arg)) {
-        $io = IO::Handle->new_from_fd($arg, $mode);
+        $io = IO::Handle->new_from_fd($arg, $mode) // $arg;
         binmode $io, $binmode;
     } elsif (is_string($arg)) {
         $io = IO::File->new($arg, $mode);
@@ -133,7 +133,7 @@ sub write_file {
 
 sub read_yaml {
     # dies on error
-    YAML::Any::LoadFile($_[0]);
+    YAML::XS::LoadFile($_[0]);
 }
 
 sub read_json {
@@ -512,7 +512,7 @@ sub require_package {
     return $pkg if is_invocant($pkg);
 
     eval "require $pkg;1;"
-        or Catmandu::Error->throw($@);
+        or Catmandu::NoSuchPackage->throw("$pkg");
 
     $pkg;
 }

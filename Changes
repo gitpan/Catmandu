@@ -1,5 +1,18 @@
 Revision history for Catmandu
 
+0.92  2014-06-06 13:06:01 CEST
+  - more pod
+  - bump required version of Moo
+  - require YAML::XS to avoid YAML weirdness
+  - fix CLI include path load order
+  - MooX::Log::Any replaced by Catmandu::Logger because it doesn't set the
+    correct category
+  - config command can use any Exporter
+  - Importer::JSON multiline is more robust
+  - Exporter::JSON supports canonical, indent, space_before, space_after
+    options
+  - info commands and matching importers
+
 0.9103  2014-05-23 10:24:52 CEST
   - fix script dir in build script
   - Fix::Parser handles empty comments
