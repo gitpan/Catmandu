@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "catmandu",
+   "name" : "Catmandu",
    "no_index" : {
       "directory" : [
          "t",
@@ -109,7 +109,7 @@
          "web" : "https://github.com/LibreCat/Catmandu"
       }
    },
-   "version" : "0.92",
+   "version" : "0.9201",
    "x_contributors" : [
       "Christian Pietsch <chr.pietsch+github@googlemail.com>",
       "Dave Sherohman <Dave.Sherohman@lub.lu.se>",
