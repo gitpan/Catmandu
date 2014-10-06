@@ -7,21 +7,32 @@ use Moo;
 
 with 'Catmandu::Exporter';
 
-has csv          => (is => 'ro', lazy => 1, builder => '_build_csv');
+has csv          => (is => 'ro', lazy => 1, builder => 1);
 has sep_char     => (is => 'ro', default => sub { ',' });
 has quote_char   => (is => 'ro', default => sub { '"' });
 has escape_char  => (is => 'ro', default => sub { '"' });
 has always_quote => (is => 'ro');
-has header       => (is => 'rw', default => sub { 1 });
+has header       => (is => 'lazy', default => sub { 1 });
+
 has fields => (
-    is     => 'rw',
-    coerce => sub {
-        my $fields = $_[0];
-        if (ref $fields eq 'ARRAY') { return $fields }
-        if (ref $fields eq 'HASH')  { return [sort keys %$fields] }
-        return [split ',', $fields];
+    is      => 'rw',
+    trigger => sub {
+        my ($self, $fields) = @_;
+        $self->{fields} = _coerce_list($fields);
+        if (ref $fields and ref $fields eq 'HASH') {
+            $self->{header} = [
+                map { $fields->{$_} // $_ } @{$self->{fields}} 
+            ];
+        }
     },
 );
+
+sub _coerce_list {
+    my $fields = $_[0];
+    if (ref $fields eq 'ARRAY') { return $fields }
+    if (ref $fields eq 'HASH')  { return [sort keys %$fields] }
+    return [split ',', $fields];
+}
 
 sub _build_csv {
     my ($self) = @_;
@@ -29,7 +40,7 @@ sub _build_csv {
         binary => 1,
         eol => "\n",
         sep_char => $self->sep_char,
-        always_quote => $self->always_quote,
+        always_quote => $self->always_quote,        
         quote_char => $self->quote_char ? $self->quote_char : undef,
         escape_char => $self->escape_char ? $self->escape_char : undef,
     });
@@ -37,7 +48,8 @@ sub _build_csv {
 
 sub add {
     my ($self, $data) = @_;
-    my $fields = $self->fields || $self->fields($data);
+    $self->fields([ sort keys %$data ]) unless $self->fields;
+    my $fields = $self->fields;
     my $row = [map {
         my $val = $data->{$_} // "";
         $val =~ s/\t/\\t/g;
@@ -47,9 +59,7 @@ sub add {
     } @$fields];
     my $fh = $self->fh;
     if ($self->count == 0 && $self->header) {
-        $self->csv->print($fh, ref $self->header
-            ? [map { $self->header->{$_} // $_ } @$fields]
-            : $fields);
+        $self->csv->print($fh, ref $self->header ? $self->header : $fields);
     }
     $self->csv->print($fh, $row);
 }
@@ -63,18 +73,15 @@ Catmandu::Exporter::CSV - a CSV exporter
     use Catmandu::Exporter::CSV;
 
     my $exporter = Catmandu::Exporter::CSV->new(
-				fix => 'myfix.txt'
-				quote_char => '"' ,
+				fix => 'myfix.txt',
+				quote_char => '"',
+				sep_char => ',',
                 escape_char => '"' ,
                 always_quote => 1,
-				sep_char => ',' ,
 				header => 1);
 
     $exporter->fields("f1,f2,f3");
     $exporter->fields([qw(f1 f2 f3)]);
-
-    # add custom header labels
-    $exporter->header({f2 => 'field two'});
 
     $exporter->add_many($arrayref);
     $exporter->add_many($iterator);
@@ -84,38 +91,51 @@ Catmandu::Exporter::CSV - a CSV exporter
 
     printf "exported %d objects\n" , $exporter->count;
 
+=head1 DESCRIPTION
+
+This C<Catmandu::Exporter> exports items as rows with comma-separated values
+(CSV). Serialization is based on L<Text::CSV>. A header line with field names
+will be included if option C<header> is set. Field names can be read from the
+first item exported or set by option C<fields>. Newlines and tabulator values
+are in field values are escaped as C<\n>, C<\r>, and C<\t>.
+
+=head1 CONFIGURATION
+
+=over 4
+
+=item sep_char
+
+Column separator (C<,> by default>)
+
+=item quote_char
+
+Quotation character (C<"> by default>)
+
+=item escape_char
+
+Character for escaping inside quoted field (C<"> by default)
+
+=item fields
+
+List of fields to be used as columns, given as array reference, comma-separated
+string, or hash reference.
+
+=item header
+
+Include a header line with the column names, if set to C<1> (the default).
+Custom field names can be supplied as has reference. By default field names
+are used as as column names.
+
+=back
+
 =head1 METHODS
 
-=head2 new(quote_char => STRING, sep_char => STRING, header => 0|1|HASH, fields => ARRAY|HASH|STRING)
-
-Creates a new Catmandu::Exporter::CSV. Optionally set the field and column
-boundaries with quote_char , sep_char and always_quote. A header line with field names will be
-included if C<header> is set. Field names can be read from the first item
-exported or set by the fields argument (see: C<fields>).
-
-=head2 fields($arrayref)
-
-Set the field names by an ARRAY reference.
-
-=head2 fields($hashref)
-
-Set the field names by the keys of a HASH reference.
-
-=head2 fields($string)
-
-Set the fields by a comma delimited string.
-
-=head2 header(1)
-
-Include a header line with the field names
-
-=head2 header($hashref)
-
-Include a header line with custom field names
+See L<Catmandu::Exporter>, L<Catmandu::Addable>, L<Catmandu::Fixable>,
+L<Catmandu::Counter>, and L<Catmandu::Logger> for a full list of methods.
 
 =head1 SEE ALSO
 
-L<Catmandu::Exporter>
+L<Catmandu::Exporter::Table>
 
 =cut
 

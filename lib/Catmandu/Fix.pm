@@ -41,6 +41,8 @@ sub _trigger_fixes {
     for my $fix (@$fixes) {
         if (ref $fix) {
             push @$parsed_fixes, $fix;
+        } elsif($fix !~ /\n/ and -X $fix) {
+            push @$parsed_fixes, require_package('Catmandu::Fix::cmd')->new($fix);
         } else {
             push @$parsed_fixes, @{$self->parser->parse($fix)};
         }
@@ -670,13 +672,14 @@ E.g.
 
 Read more about the Fix language at our Wiki: L<https://github.com/LibreCat/Catmandu/wiki/Fixes>
 
-=head1 METHODS
+=head1 PUBLIC METHODS
 
 =head2 new(fixes => [ FIX , ...])
 
-Create a new Catmandu::Fix which will execute every FIX into a consecutive order. A
-FIX can be the name of a Catmandu::Fix::* routine or the path to a plain text file
-containing all the fixes to be executed.
+Create a new Catmandu::Fix which will execute every FIX into a consecutive
+order. A FIX can be the name of a Catmandu::Fix::* routine, or the path to a
+plain text file containing all the fixes to be executed or a path to any
+executable if L<Catmandu::Fix::cmd> is installed.
 
 =head2 fix(HASH)
 
@@ -697,9 +700,7 @@ Executes all the fixes on a generator function. Returns a new generator with fix
 
 =head2 log
 
-Return the current logger. Can be used when creating your own Fix commands.
-
-E.g.
+Return the current logger. Can be used when creating your own Fix commands, e.g.
 
     package Catmandu::Fix::meow;
 
@@ -714,8 +715,56 @@ E.g.
         $data;
     }
 
-See also: L<Catmandu> for activating the logger in your main code.
+See L<Catmandu> for activating the logger in your main code.
 
+=head1 INTERNAL METHODS
+
+This module provides several methods for writing fix packages. Usage can best
+be understood by reading the code of existing fix packages.
+
+=over
+
+=item capture
+
+=item emit_block
+
+=item emit_clone
+
+=item emit_create_path
+
+=item emit_declare_vars
+
+=item emit_delete_key
+
+=item emit_fix
+
+=item emit_fixes
+
+=item emit_get_key
+
+=item emit_reject
+
+=item emit_retain_key
+
+=item emit_set_key
+
+=item emit_string
+
+=item emit_value
+
+=item emit_walk_path
+
+=item generate_var
+
+=item split_path
+
+=back
+
+=head1 SEE ALSO
+
+Fixes are used by instances of L<Catmandu::Fixable> to manipulate items
+L<Catmandu::Importer>, L<Catmandu::Exporter>, and L<Catmandu::Bag>.
+ 
 =cut
 
 1;

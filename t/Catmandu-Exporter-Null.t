@@ -5,7 +5,7 @@ use Test::Exception;
 
 my $pkg;
 BEGIN {
-    $pkg = 'Catmandu::Exporter::CSV';
+    $pkg = 'Catmandu::Exporter::Null';
     use_ok $pkg;
 }
 require_ok $pkg;
@@ -19,20 +19,7 @@ isa_ok $exporter, $pkg;
 $exporter->add($_) for @$data;
 $exporter->commit;
 
-my $csv = <<EOF;
-a,b
-moose,1
-pony,2
-shrimp,3
-EOF
-
-is $out, $csv, "CSV strings ok";
+is $out,'', "Null is empty ok";
 is $exporter->count,3, "Count ok";
  
-$out = "";
-$exporter = $pkg->new( fields => { a => 'Longname', x => 'X' }, file => \$out );
-$exporter->add( { a => 'Hello', b => 'World' } );
-$csv = "Longname,X\nHello,\n";
-is $out, $csv, "custom column names as HASH";
-
 done_testing;
