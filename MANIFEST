@@ -182,7 +182,6 @@ t/Catmandu-Hits.t
 t/Catmandu-Importer-CSV.t
 t/Catmandu-Importer-JSON.t
 t/Catmandu-Importer-Mock.t
-t/Catmandu-Importer-ModuleInfo.t
 t/Catmandu-Importer-YAML.t
 t/Catmandu-Importer.t
 t/Catmandu-Iterable.t

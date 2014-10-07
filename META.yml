@@ -67,7 +67,7 @@ resources:
   bugtracker: https://github.com/LibreCat/Catmandu/issues
   homepage: https://github.com/LibreCat/Catmandu
   repository: https://github.com/LibreCat/Catmandu.git
-version: '0.9205'
+version: '0.9206'
 x_contributors:
   - 'Christian Pietsch <chr.pietsch+github@googlemail.com>'
   - 'Dave Sherohman <Dave.Sherohman@lub.lu.se>'
