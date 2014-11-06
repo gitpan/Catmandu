@@ -4,7 +4,7 @@
       "Nicolas Steenlant, C<< <nicolas.steenlant at ugent.be> >>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.5, Dist::Zilla version 5.017, CPAN::Meta::Converter version 2.140640",
+   "generated_by" : "Dist::Milla version v1.0.5, Dist::Zilla version 5.017, CPAN::Meta::Converter version 2.142690",
    "license" : [
       "perl_5"
    ],
@@ -109,7 +109,7 @@
          "web" : "https://github.com/LibreCat/Catmandu"
       }
    },
-   "version" : "0.9206",
+   "version" : "0.9207",
    "x_contributors" : [
       "Christian Pietsch <chr.pietsch+github@googlemail.com>",
       "Dave Sherohman <Dave.Sherohman@lub.lu.se>",
