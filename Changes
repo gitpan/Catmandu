@@ -1,5 +1,8 @@
 Revision history for Catmandu
 
+0.9208  2014-11-20 09:50:56 CET
+  - lazy and more robust fix building in Fix.pm
+
 0.9207  2014-11-06 09:53:08 CET
   - greater_than, less_than fix conditions
   - fix bug in Paged
