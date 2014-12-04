@@ -24,6 +24,7 @@ lib/Catmandu/Cmd/data.pm
 lib/Catmandu/Cmd/delete.pm
 lib/Catmandu/Cmd/export.pm
 lib/Catmandu/Cmd/import.pm
+lib/Catmandu/Cmd/info.pm
 lib/Catmandu/Cmd/move.pm
 lib/Catmandu/Counter.pm
 lib/Catmandu/Env.pm
@@ -52,6 +53,7 @@ lib/Catmandu/Fix/Condition/greater_than.pm
 lib/Catmandu/Fix/Condition/less_than.pm
 lib/Catmandu/Fix/Has.pm
 lib/Catmandu/Fix/Parser.pm
+lib/Catmandu/Fix/SimpleGetValue.pm
 lib/Catmandu/Fix/add_field.pm
 lib/Catmandu/Fix/add_to_store.pm
 lib/Catmandu/Fix/append.pm
@@ -77,6 +79,7 @@ lib/Catmandu/Fix/prepend.pm
 lib/Catmandu/Fix/reject.pm
 lib/Catmandu/Fix/remove_field.pm
 lib/Catmandu/Fix/replace_all.pm
+lib/Catmandu/Fix/retain.pm
 lib/Catmandu/Fix/retain_field.pm
 lib/Catmandu/Fix/set_field.pm
 lib/Catmandu/Fix/sort_field.pm
@@ -122,6 +125,7 @@ t/Catmandu-Cmd-data.t
 t/Catmandu-Cmd-delete.t
 t/Catmandu-Cmd-export.t
 t/Catmandu-Cmd-import.t
+t/Catmandu-Cmd-info.t
 t/Catmandu-Cmd-move.t
 t/Catmandu-Cmd.t
 t/Catmandu-Counter.t
@@ -170,6 +174,7 @@ t/Catmandu-Fix-prepend.t
 t/Catmandu-Fix-reject.t
 t/Catmandu-Fix-remove_field.t
 t/Catmandu-Fix-replace_all.t
+t/Catmandu-Fix-retain.t
 t/Catmandu-Fix-retain_field.t
 t/Catmandu-Fix-set_field.t
 t/Catmandu-Fix-sort_field.t
