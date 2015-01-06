@@ -3,8 +3,7 @@ abstract: 'a data toolkit'
 author:
   - 'Nicolas Steenlant, C<< <nicolas.steenlant at ugent.be> >>'
 build_requires:
-  Log::Any::Adapter: '0.11'
-  Log::Any::Test: '0.15'
+  Log::Any::Test: '1.03'
   Module::Build: '0.3601'
   Test::Deep: '0.112'
   Test::Exception: '0.32'
@@ -36,7 +35,7 @@ recommends:
   Log::Any::Adapter::Log4perl: '0.06'
   Log::Log4perl: '1.44'
 requires:
-  App::Cmd: '0.323'
+  App::Cmd: '0.326'
   CGI::Expand: '2.02'
   Clone: '0.31'
   Config::Onion: '1.004'
@@ -47,8 +46,8 @@ requires:
   IO::Handle::Util: '0.01'
   JSON::XS: '2.3'
   List::MoreUtils: '0.33'
-  Log::Any: '0.15'
-  Log::Any::Adapter: '0.11'
+  Log::Any: '1.03'
+  Log::Any::Adapter: '1.03'
   Marpa::R2: '2.084000'
   Module::Info: '0'
   Moo: '1.004006'
@@ -66,7 +65,7 @@ resources:
   bugtracker: https://github.com/LibreCat/Catmandu/issues
   homepage: https://github.com/LibreCat/Catmandu
   repository: https://github.com/LibreCat/Catmandu.git
-version: '0.9209'
+version: '0.9210'
 x_contributors:
   - 'Christian Pietsch <chr.pietsch+github@googlemail.com>'
   - 'Dave Sherohman <Dave.Sherohman@lub.lu.se>'
@@ -77,6 +76,7 @@ x_contributors:
   - 'EC2 Default User <ec2-user@ip-10-77-5-148.ec2.internal>'
   - 'Jakob Voss <jakob@nichtich.de>'
   - 'Jakob Voss <voss@gbv.de>'
+  - 'Johann Rolschewski <rolschewski@gmail.com>'
   - 'Nicolas <nicolas.steenlant@ugent.be>'
   - 'Nicolas Franck <nicolas.franck@ugent.be>'
   - 'Nicolas Steenlant <nicolas.steenlant@gmail.com>'
